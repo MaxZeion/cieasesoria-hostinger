@@ -1,0 +1,218 @@
+---
+import { Mail, ShieldAlert } from "lucide-astro";
+---
+
+<section id="contacto" class="py-20 px-8 bg-white text-surface">
+    <div class="max-w-[1200px] mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-4xl font-bold text-surface mb-4">
+                Hablemos de tu Proyecto
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Estamos listos para resolver tus dudas. Completa el formulario y envía tu consulta.
+            </p>
+        </div>
+
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start"
+        >
+            <!-- Contact Info -->
+            <div class="flex flex-col gap-8">
+                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+                    <h3
+                        class="font-serif text-2xl font-bold mb-6 text-brand-dark"
+                    >
+                        Información de Contacto
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="p-3 bg-white rounded-lg text-brand shadow-sm"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                                    ></path></svg
+                                >
+                            </div>
+                            <div>
+                                <p class="font-bold text-surface">Teléfono</p>
+                                <a
+                                    href="tel:928948264"
+                                    class="text-gray-600 hover:text-brand transition-colors"
+                                    >928 94 82 64</a
+                                >
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="p-3 bg-white rounded-lg text-brand shadow-sm"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><rect
+                                        width="20"
+                                        height="16"
+                                        x="2"
+                                        y="4"
+                                        rx="2"></rect><path
+                                        d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
+                                    ></path></svg
+                                >
+                            </div>
+                            <div>
+                                <p class="font-bold text-surface">Email</p>
+                                <a
+                                    href="mailto:cieasesoria@gmail.com"
+                                    class="text-gray-600 hover:text-brand transition-colors"
+                                    >cieasesoria@gmail.com</a
+                                >
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="p-3 bg-white rounded-lg text-brand shadow-sm"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><path
+                                        d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                                    ></path><circle cx="12" cy="10" r="3"
+                                    ></circle></svg
+                                >
+                            </div>
+                            <div>
+                                <p class="font-bold text-surface">Oficina</p>
+                                <p class="text-gray-600">
+                                    Avda. de la Constitución, 3<br />Planta 1,
+                                    Puerta 4<br />35620 Gran Tarajal, Las Palmas
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <form
+                action="#"
+                method="POST"
+                class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 flex flex-col gap-6"
+            >
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2">
+                        <label
+                            for="nombre"
+                            class="font-medium text-sm text-gray-700"
+                            >Nombre completo</label
+                        >
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            required
+                            placeholder="Tu nombre"
+                            class="px-4 py-3 rounded-lg border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
+                        />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label
+                            for="telefono"
+                            class="font-medium text-sm text-gray-700"
+                            >Teléfono</label
+                        >
+                        <input
+                            type="tel"
+                            id="telefono"
+                            name="telefono"
+                            placeholder="Tu teléfono"
+                            class="px-4 py-3 rounded-lg border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
+                        />
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label for="email" class="font-medium text-sm text-gray-700"
+                        >Correo electrónico</label
+                    >
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="tucorreo@ejemplo.com"
+                        class="px-4 py-3 rounded-lg border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
+                    />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label
+                        for="mensaje"
+                        class="font-medium text-sm text-gray-700">Mensaje</label
+                    >
+                    <textarea
+                        id="mensaje"
+                        name="mensaje"
+                        rows="4"
+                        required
+                        placeholder="¿En qué podemos ayudarte?"
+                        class="px-4 py-3 rounded-lg border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all resize-none"
+                    ></textarea>
+                </div>
+
+                <div class="flex items-start gap-3">
+                    <input
+                        type="checkbox"
+                        id="privacidad"
+                        name="privacidad"
+                        required
+                        class="mt-1 w-4 h-4 text-brand rounded border-gray-300 focus:ring-brand"
+                    />
+                    <label for="privacidad" class="text-sm text-gray-500">
+                        He leído y acepto la <a
+                            href="/legal/privacidad"
+                            class="text-brand hover:underline"
+                            >política de privacidad</a
+                        > y autorizo el tratamiento de mis datos para responder a
+                        esta consulta.
+                    </label>
+                </div>
+
+                <button
+                    type="submit"
+                    class="mt-2 w-full px-8 py-4 bg-brand text-white font-bold rounded-lg shadow-lg hover:bg-brand-dark hover:-translate-y-1 transition-all duration-300"
+                >
+                    Enviar Mensaje
+                </button>
+            </form>
+        </div>
+    </div>
+</section>

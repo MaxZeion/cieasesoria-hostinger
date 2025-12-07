@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Stats from "../components/Stats.astro";
+import Services from "../components/Services.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Technology from "../components/Technology.astro";
+---
+
+<Layout title="Asesoría online en Canarias">
+    <main id="main-content" class="w-full flex flex-col">
+        <Hero />
+        <Stats />
+        <Services />
+        <Technology />
+        <About />
+        <Contact />
+    </main>
+</Layout>
+
+<style>
+    /* Animations kept in CSS if Tailwind config doesn't have them, or use arbitrary values in config */
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

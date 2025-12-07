@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # Servicio A: Web Corporativa
+  web:
+    build:
+      context: ./cieasesoria-web
+      dockerfile: Dockerfile
+    container_name: cieasesoria-web
+    restart: unless-stopped
+    expose:
+      - "80"
+    labels:
+      - "traefik.enable=true"
+      # Router para cieasesoria.com
+      - "traefik.http.routers.cieasesoria-web.rule=Host(`cieasesoria.com`) || Host(`www.cieasesoria.com`)"
+      - "traefik.http.routers.cieasesoria-web.entrypoints=websecure"
+      - "traefik.http.routers.cieasesoria-web.tls.certresolver=letsencrypt"
+      # Servicio interno
+      - "traefik.http.services.cieasesoria-web.loadbalancer.server.port=80"
+    networks:
+      - dokploy-network
+
+  # Servicio B: Canal de Denuncias (GlobaLeaks)
+  globaleaks:
+    image: globaleaks/globaleaks:latest
+    container_name: globaleaks
+    restart: unless-stopped
+    volumes:
+      # Persistencia en carpeta local ./globaleaks/data
+      - ./globaleaks/data:/var/globaleaks
+    environment:
+      # Desactivar manejo SSL interno para no competir con Traefik
+      - GL_LETSENCRYPT_DISABLE=1
+    expose:
+      - "80"
+    labels:
+      - "traefik.enable=true"
+      # Router para canaldenuncias
+      - "traefik.http.routers.globaleaks.rule=Host(`canaldenuncias.cieasesoria.com`)"
+      - "traefik.http.routers.globaleaks.entrypoints=websecure"
+      - "traefik.http.routers.globaleaks.tls.certresolver=letsencrypt"
+
+      # SEGURIDAD: Basic Auth para proteger el Wizard el día 1 (Usuario: admin / Pass: setup2025)
+      # Descomenta las líneas de abajo si quieres protegerlo antes de configurar:
+      - "traefik.http.middlewares.gl-auth.basicauth.users=admin:$apr1$Ndt7hT3k$S0zFw6ShqfNobB.JjE54.."
+      - "traefik.http.routers.globaleaks.middlewares=gl-auth"
+
+      # Servicio interno (apunta al puerto 80 del contenedor)
+      - "traefik.http.services.globaleaks.loadbalancer.server.port=80"
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true

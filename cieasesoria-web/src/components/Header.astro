@@ -1,0 +1,185 @@
+---
+const { theme = "light" } = Astro.props;
+---
+
+<header
+    id="main-header"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12"
+>
+    <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <a href="/" class="z-50 relative">
+            <img
+                id="header-logo"
+                src="/assets/white-logo-no-background.svg"
+                alt="CIE Asesoría"
+                class="h-10 w-auto transition-all duration-300"
+            />
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8">
+            <a
+                href="/#servicios"
+                class="nav-link text-white/90 hover:text-white font-medium transition-colors"
+                >Servicios</a
+            >
+            <a
+                href="/#nosotros"
+                class="nav-link text-white/90 hover:text-white font-medium transition-colors"
+                >Nosotros</a
+            >
+            <a
+                href="/news"
+                class="nav-link text-white/90 hover:text-white font-medium transition-colors"
+                >Noticias</a
+            >
+            <a
+                href="/#contacto"
+                class="px-5 py-2 bg-white text-brand font-bold rounded-full hover:bg-white/90 transition-all shadow-md"
+            >
+                Contactar
+            </a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden z-50 text-white p-2">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-menu"
+                ><line x1="4" x2="20" y1="12" y2="12"></line><line
+                    x1="4"
+                    x2="20"
+                    y1="6"
+                    y2="6"></line><line x1="4" x2="20" y1="18" y2="18"
+                ></line></svg
+            >
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-brand-dark/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 md:hidden flex justify-center items-center"
+    >
+        <nav class="flex flex-col gap-8 text-center text-white text-xl">
+            <a href="/#servicios" class="mobile-link hover:text-brand-light"
+                >Servicios</a
+            >
+            <a href="/#nosotros" class="mobile-link hover:text-brand-light"
+                >Nosotros</a
+            >
+            <a href="/news" class="mobile-link hover:text-brand-light"
+                >Noticias</a
+            >
+            <a
+                href="/#contacto"
+                class="mobile-link px-6 py-2 bg-white text-brand font-bold rounded-full"
+                >Contactar</a
+            >
+        </nav>
+    </div>
+</header>
+
+<style>
+    /* Scrolled state */
+    header.scrolled {
+        @apply bg-white/95 backdrop-blur shadow-sm py-3;
+    }
+
+    header.scrolled #header-logo {
+        filter: invert(1) brightness(0.5) sepia(1) hue-rotate(200deg)
+            saturate(3);
+    }
+
+    header.scrolled .nav-link {
+        @apply text-gray-700 hover:text-brand;
+    }
+
+    /* Home Page Logic: Logo hidden initially */
+    :global(body.is-home) #header-logo {
+        opacity: 0;
+        pointer-events: none; /* Prevent clicks when hidden */
+    }
+    :global(body.is-home) header.past-hero #header-logo {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Non-Home Pages: Logo always visible (unless we want specific logic, but default to visible) */
+    :global(body:not(.is-home)) #header-logo {
+        opacity: 1;
+    }
+
+    /* Theme overrides for non-scrolled header on light pages */
+    :global(body.theme-light) header:not(.scrolled) .nav-link {
+        @apply text-gray-700 hover:text-brand;
+    }
+    :global(body.theme-light) header:not(.scrolled) #header-logo {
+        filter: invert(1) brightness(0.5) sepia(1) hue-rotate(200deg)
+            saturate(3);
+    }
+    :global(body.theme-light) header:not(.scrolled) #mobile-menu-btn {
+        @apply text-gray-800;
+    }
+</style>
+
+<script>
+    const header = document.getElementById("main-header");
+    const logo = document.getElementById("header-logo") as HTMLImageElement;
+    const mobileBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    // Check if we are on home (simple check, or rely on body class added by layout/page)
+    const isHome = document.body.classList.contains("is-home");
+
+    function updateHeader() {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+
+        // 1. Bg background logic
+        if (scrollY > 20) {
+            header?.classList.add("scrolled");
+        } else {
+            header?.classList.remove("scrolled");
+        }
+
+        // 2. Home Logo Logic: Show only after passing Hero (approx 1 viewport)
+        // We use a slightly smaller threshold (0.9) to make it appear just as we leave the hero
+        if (isHome) {
+            if (scrollY > viewportHeight * 0.9) {
+                header?.classList.add("past-hero");
+            } else {
+                header?.classList.remove("past-hero");
+            }
+        }
+    }
+
+    window.addEventListener("scroll", updateHeader);
+    window.addEventListener("resize", updateHeader); // Update calculation on resize
+
+    // Mobile Menu
+    mobileBtn?.addEventListener("click", () => {
+        mobileMenu?.classList.toggle("translate-x-full");
+        document.body.classList.toggle("overflow-hidden");
+    });
+
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            mobileMenu?.classList.add("translate-x-full");
+            document.body.classList.remove("overflow-hidden");
+        });
+    });
+
+    // Initial check
+    updateHeader();
+</script>

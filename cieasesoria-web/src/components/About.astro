@@ -1,0 +1,92 @@
+---
+import { CheckCircle2, Handshake } from "lucide-astro";
+---
+
+<section
+    class="py-24 px-8 bg-corporate-gradient text-white relative overflow-hidden"
+>
+    <!-- Visual Decorator -->
+    <div
+        class="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full blur-[100px] pointer-events-none"
+    >
+    </div>
+
+    <div
+        class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10"
+    >
+        <!-- Text Content -->
+        <div class="flex-1 space-y-8">
+            <h2 class="font-serif text-4xl font-bold leading-tight">
+                Tu empresa, <br />
+                <span class="text-brand"
+                    >un ecosistema conectado e inteligente</span
+                >
+            </h2>
+            <div class="w-20 h-1 bg-brand"></div>
+
+            <p class="text-lg text-gray-200 leading-relaxed font-light">
+                Entendemos tu negocio como una red viva. No gestionamos
+                documentos aislados; integramos tus datos fiscales, laborales y
+                contables para crear una visión global y fluida de tu actividad.
+            </p>
+
+            <ul class="space-y-4 text-gray-200">
+                <li class="flex items-center gap-3">
+                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" /> Sincronización
+                    total de datos
+                </li>
+                <li class="flex items-center gap-3">
+                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" /> Visión 360º
+                    de tu crecimiento
+                </li>
+                <li class="flex items-center gap-3">
+                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" /> Gestión
+                    proactiva y sin fricción
+                </li>
+            </ul>
+
+            <div class="pt-4">
+                <a
+                    href="/news"
+                    class="px-8 py-3 bg-transparent border-2 border-brand text-brand font-bold rounded-full hover:bg-brand hover:text-surface hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300"
+                >
+                    Conoce nuestras novedades
+                </a>
+            </div>
+        </div>
+
+        <!-- Image/Visual Placeholder -->
+        <div class="flex-1 w-full flex justify-center">
+            <div
+                class="relative w-full max-w-sm aspect-square border-2 border-white/10 rounded-2xl p-4 rotate-3 hover:rotate-0 transition-transform duration-500 group"
+            >
+                <div
+                    class="absolute inset-0 bg-brand/10 backdrop-blur-sm rounded-2xl -z-10 group-hover:bg-brand/20 transition-colors"
+                >
+                </div>
+                <div
+                    class="w-full h-full rounded-xl overflow-hidden border border-white/20 shadow-2xl relative"
+                >
+                    <img
+                        src="/assets/about-abstract.png"
+                        alt="Estructura y solidez empresarial"
+                        class="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <!-- Overlay Text -->
+                    <div
+                        class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent"
+                    >
+                        <h3
+                            class="font-serif text-xl font-bold text-white mb-1"
+                        >
+                            Ecosistema Digital
+                        </h3>
+                        <p class="text-sm text-gray-300">
+                            Gestión unificada y sin barreras.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

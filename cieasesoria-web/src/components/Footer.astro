@@ -1,0 +1,64 @@
+---
+import { ShieldAlert } from "lucide-astro";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+    class="py-10 px-8 border-t border-gray-100 bg-white text-surface w-full"
+>
+    <div
+        class="max-w-[1000px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500"
+    >
+        <p>
+            © {currentYear} CIE Asesoría.
+        </p>
+
+        <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <a
+                href="/legal/aviso-legal"
+                class="hover:text-brand transition-colors">Aviso Legal</a
+            >
+            <a href="/legal/terminos" class="hover:text-brand transition-colors"
+                >Términos de Servicio</a
+            >
+            <a
+                href="/legal/privacidad"
+                class="hover:text-brand transition-colors"
+                >Política de Privacidad</a
+            >
+            <a
+                href="https://canaldenuncias.cieasesoria.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-brand transition-colors flex items-center gap-1"
+            >
+                <ShieldAlert size={14} /> Canal de Denuncias
+            </a>
+            <button
+                id="footer-privacy-btn"
+                class="hover:text-brand transition-colors cursor-pointer text-gray-500 bg-transparent border-none p-0 font-inherit"
+            >
+                Cookies
+            </button>
+        </nav>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const openBtn = document.getElementById("footer-privacy-btn");
+
+        if (openBtn) {
+            openBtn.addEventListener("click", () => {
+                if (window.cieOpenPrivacyModal) {
+                    window.cieOpenPrivacyModal();
+                } else {
+                    console.error(
+                        "[Footer] cieOpenPrivacyModal not found on window",
+                    );
+                }
+            });
+        }
+    });
+</script>

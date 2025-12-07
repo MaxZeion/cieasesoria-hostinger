@@ -1,0 +1,50 @@
+---
+import { Briefcase, TrendingUp, BookOpen, ArrowRight } from 'lucide-astro';
+
+const services = [
+    {
+        title: "Laboral",
+        description: "Gestión integral de nóminas, seguros sociales y contratación. Asesoramiento jurídico-laboral continuo para su tranquilidad.",
+        Icon: Briefcase
+    },
+    {
+        title: "Fiscal",
+        description: "Planificación fiscal eficiente, presentación de impuestos y representación ante la Agencia Tributaria.",
+        Icon: TrendingUp
+    },
+    {
+        title: "Contable",
+        description: "Contabilidad al día, análisis de balances y libros oficiales. Información clara para la toma de decisiones.",
+        Icon: BookOpen
+    }
+];
+---
+
+<section id="servicios" class="py-20 px-8 bg-white text-surface">
+    <div class="max-w-[1200px] mx-auto">
+        <header class="text-center mb-16">
+            <h2 class="font-serif text-4xl font-bold text-surface mb-4">Nuestros Servicios</h2>
+             <div class="w-[60px] h-[3px] bg-brand mx-auto mb-6"></div>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Ofrecemos una gestión 360º para autónomos y pymes, combinando la experiencia técnica con la última tecnología.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {services.map(service => (
+                <div class="p-8 rounded-2xl bg-gray-50 border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:border-brand/30 transition-all duration-300 group">
+                    <div class="mb-6 transform group-hover:scale-110 transition-transform duration-300 text-brand">
+                        <service.Icon size={48} strokeWidth={1.5} />
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-4 text-surface">{service.title}</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        {service.description}
+                    </p>
+                    <a href="#contacto" class="inline-flex items-center text-primary font-bold text-sm tracking-wider uppercase hover:text-brand-dark transition-colors">
+                        Saber más <ArrowRight class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                    </a>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>

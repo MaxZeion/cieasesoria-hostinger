@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = await getCollection('news', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+// Sort by date descending
+const sortedNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Noticias - CIE Asesoría" theme="light">
+  <main id="main-content" class="flex-1 w-full max-w-[1200px] mx-auto p-8">
+    
+    <!-- Page Header -->
+    <header class="mb-12 text-center">
+      <h1 class="font-serif text-[2.5rem] font-bold text-surface mb-4">Actualidad y Noticias</h1>
+      <div class="w-[60px] h-[3px] bg-brand mx-auto opacity-70 mb-8"></div>
+      
+      <!-- Search Bar -->
+      <div class="max-w-md mx-auto relative group">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-brand transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <input 
+            type="text" 
+            id="news-search" 
+            placeholder="Buscar noticias..." 
+            class="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-full focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand shadow-sm transition-all text-gray-600 placeholder:text-gray-400"
+        />
+      </div>
+    </header>
+
+    <!-- News Grid -->
+    <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedNews.map((newsItem) => {
+        return (
+        <article 
+            class="news-item bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:border-brand/50 transition-all duration-300 group flex flex-col relative overflow-hidden"
+            data-search={`${newsItem.data.title} ${newsItem.body}`.toLowerCase()}
+        >
+          
+          <!-- Decorative top accent -->
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand to-brand-dark transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+
+          <div class="flex items-center justify-between mb-6">
+             <span class="px-3 py-1 bg-blue-50 text-primary text-xs font-bold uppercase tracking-wider rounded-full">
+                {newsItem.data.tags ? newsItem.data.tags[0] : 'Actualidad'}
+             </span>
+             <span class="text-xs font-medium text-gray-400">
+                {newsItem.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+             </span>
+          </div>
+          
+          <h2 class="font-serif text-2xl font-bold mb-4 text-surface leading-tight group-hover:text-brand transition-colors">
+            <a href={`/news/${newsItem.slug}`} class="focus:outline-none">
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              {newsItem.data.title}
+            </a>
+          </h2>
+          
+          <p class="text-gray-600 line-clamp-4 leading-relaxed mb-6 flex-1">
+            {newsItem.body.substring(0, 150)}...
+          </p>
+          
+          <div class="flex items-center text-brand font-bold text-sm">
+            Leer artículo <span class="group-hover:translate-x-1 transition-transform ml-2">→</span>
+          </div>
+        </article>
+      )})}
+    </div>
+
+    <!-- No results message -->
+    <div id="no-results" class="hidden text-center py-20 opacity-70">
+        <p class="text-xl font-serif text-gray-500">No se encontraron noticias con esa búsqueda.</p>
+    </div>
+
+    {sortedNews.length === 0 && (
+      <div class="text-center py-20 opacity-70">
+        <p class="text-xl font-serif text-gray-500">No hay noticias publicadas en este momento.</p>
+      </div>
+    )}
+
+  </main>
+    
+  <script>
+    const searchInput = document.getElementById('news-search');
+    const articles = document.querySelectorAll('.news-item');
+    const noResults = document.getElementById('no-results');
+
+    searchInput?.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        const term = target.value.toLowerCase();
+        let hasResults = false;
+
+        articles.forEach(article => {
+            const htmlArticle = article as HTMLElement;
+            const content = htmlArticle.dataset.search || '';
+            if (content.includes(term)) {
+                htmlArticle.classList.remove('hidden');
+                hasResults = true;
+            } else {
+                htmlArticle.classList.add('hidden');
+            }
+        });
+
+        if (noResults) {
+            if (!hasResults && articles.length > 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+    });
+  </script>
+</Layout>

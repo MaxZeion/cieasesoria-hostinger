@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  globaleaks:
+    image: globaleaks/globaleaks:latest
+    container_name: globaleaks
+    restart: unless-stopped
+    volumes:
+      - ./data:/var/globaleaks
+      # No necesitamos montar certificados si Traefik maneja SSL,
+      # pero GlobaLeaks persistirá su DB y configuración en ./data
+    environment:
+      # Desactivar el manejo automático de certificados de GlobaLeaks
+      # para evitar conflictos con Traefik
+      - GL_LETSENCRYPT_DISABLE=1
+      # GlobaLeaks suele intentar redirigir a HTTPS. Intenta mantenerlo en HTTP
+      # para evitar bucles.
+    labels:
+      - "traefik.enable=true"
+      # Router para HTTPS
+      - "traefik.http.routers.globaleaks.rule=Host(`canaldenuncias.cieasesoria.com`)"
+      - "traefik.http.routers.globaleaks.entrypoints=websecure"
+      - "traefik.http.routers.globaleaks.tls.certresolver=letsencrypt"
+
+      # SERIVICE CONFIGURATION
+      # GlobaLeaks escucha en 80 y 443. Apuntamos al 80.
+      - "traefik.http.services.globaleaks.loadbalancer.server.port=80"
+      # MIDDLEWARE (Opcional pero recomendado para headers de seguridad)
+      #- "traefik.http.routers.globaleaks.middlewares=security-headers"
+
+      # Red de Dokploy (necesaria para que Traefik vea el contenedor)
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true

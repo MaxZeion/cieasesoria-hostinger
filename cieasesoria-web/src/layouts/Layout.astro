@@ -1,0 +1,131 @@
+---
+import "../styles/global.css";
+// Supports weights 300-600
+import "@fontsource/outfit/300.css";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/600.css";
+
+// Supports weights 400-600
+import "@fontsource/playfair-display/400.css";
+import "@fontsource/playfair-display/600.css";
+import "@fontsource/playfair-display/400-italic.css";
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  theme?: "light" | "dark";
+}
+
+const {
+  title = "CIE Asesoría - En Construcción",
+  description = "CIE Asesoría - Asesoría canaria online situada en Gran Tarajal. Expertos en gestión laboral, fiscal y contable.",
+  theme = "dark", // Default to dark for Home
+} = Astro.props;
+
+// Determine background and text classes based on theme
+const themeClasses =
+  theme === "dark"
+    ? "bg-corporate-gradient text-white"
+    : "bg-white text-surface theme-light"; // Added theme-light class for CSS targeting
+
+const isHome = Astro.url.pathname === "/";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO keywords & author -->
+    <meta
+      name="keywords"
+      content="asesoría canaria, asesoría online, Gran Tarajal, gestión laboral, fiscal, contable, CIE Asesoría"
+    />
+    <meta name="author" content="CIE Asesoría" />
+    <link
+      rel="canonical"
+      href={new URL(Astro.url.pathname, "https://cieasesoria.com")}
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta
+      property="og:image"
+      content="https://cieasesoria.com/assets/og-image.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta
+      property="twitter:image"
+      content="https://cieasesoria.com/assets/og-image.jpg"
+    />
+
+    <!-- JSON-LD Structured Data (Local Business) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AccountingService",
+        "name": "CIE Asesoría",
+        "image": "https://cieasesoria.com/assets/white-logo-no-background.svg",
+        "@id": "https://cieasesoria.com",
+        "url": "https://cieasesoria.com",
+        "telephone": "",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "",
+          "addressLocality": "Gran Tarajal",
+          "addressRegion": "Las Palmas",
+          "postalCode": "35620",
+          "addressCountry": "ES"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 28.21,
+          "longitude": -14.02
+        },
+        "priceRange": "€€",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      }
+    </script>
+
+    <title>{title}</title>
+  </head>
+  <body
+    class={`${themeClasses} ${isHome ? "is-home" : ""} font-sans min-h-screen flex flex-col overflow-x-hidden`}
+  >
+    <!-- Accessibility: Skip to Content -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-primary focus:font-bold focus:shadow-xl focus:rounded pointer-events-none focus:pointer-events-auto"
+    >
+      Saltar al contenido principal
+    </a>
+
+    <Header theme={theme} />
+
+    <slot />
+
+    <Footer />
+    <CookieBanner />
+  </body>
+</html>

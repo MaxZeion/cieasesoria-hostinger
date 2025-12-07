@@ -1,0 +1,217 @@
+---
+---
+<!-- Cookie Banner Container -->
+<div id="cookie-consent-container" class="fixed bottom-0 left-0 w-full z-50 transform translate-y-full transition-transform duration-500 will-change-transform">
+    <!-- Initial Banner -->
+    <div id="cookie-banner" class="bg-surface/95 backdrop-blur-md text-white border-t border-white/10 p-6 md:p-8 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-6 justify-between">
+            <div class="flex-1 text-center md:text-left">
+                <h3 class="font-serif text-xl font-bold mb-2 text-brand">Valoramos tu Privacidad</h3>
+                <p class="text-sm text-gray-300 leading-relaxed max-w-3xl">
+                    Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el tráfico y personalizar contenido. 
+                    Puedes aceptar todas, rechazarlas o configurar tus preferencias. Más información en nuestra 
+                    <a href="/cookies" class="text-brand underline hover:text-white transition-colors">Política de Cookies</a>.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                <button id="btn-manage" class="px-6 py-2.5 text-sm font-bold border border-white/30 rounded-lg hover:bg-white/10 hover:border-white transition-colors">
+                    Configurar
+                </button>
+                <button id="btn-reject-all" class="px-6 py-2.5 text-sm font-bold bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                    Rechazar
+                </button>
+                <button id="btn-accept-all" class="px-6 py-2.5 text-sm font-bold bg-brand text-surface rounded-lg hover:bg-white transition-colors shadow-lg shadow-brand/20">
+                    Aceptar Todas
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Configuration Modal (Hidden by default) - MOVED OUTSIDE CONTAINER -->
+<div id="cookie-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-start justify-center p-4 pt-12 md:pt-24 z-[9999] overflow-y-auto">
+    <div class="bg-white text-surface rounded-xl shadow-2xl w-full max-w-2xl flex flex-col relative">
+        <!-- Header -->
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-white rounded-t-xl sticky top-0 z-10">
+            <h3 class="font-serif text-2xl font-bold text-surface">Configuración de Cookies</h3>
+            <button id="btn-close-modal" class="text-gray-400 hover:text-surface transition-colors p-2 hover:bg-gray-100 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6 space-y-6">
+            <p class="text-gray-600 text-sm">
+                Aquí puedes seleccionar qué categorías de cookies deseas autorizar. Las cookies técnicas son necesarias para que el sitio web funcione correctamente y no se pueden desactivar.
+            </p>
+
+            <!-- Technical (Required) -->
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h4 class="font-bold text-surface">Técnicas y Necesarias</h4>
+                        <span class="text-[10px] font-bold bg-brand/20 text-brand-dark px-2 py-0.5 rounded-full uppercase">Obligatorias</span>
+                    </div>
+                    <p class="text-xs text-gray-500">Permiten la navegación y el acceso a áreas seguras del sitio web.</p>
+                </div>
+                <div>
+                    <input type="checkbox" checked disabled class="w-5 h-5 text-brand rounded border-gray-300 focus:ring-brand opacity-50 cursor-not-allowed">
+                </div>
+            </div>
+
+            <!-- Analytics -->
+            <div class="flex items-start gap-4 p-4 bg-white rounded-lg border border-gray-200 transition-colors hover:border-brand/30">
+                <div class="flex-1">
+                    <h4 class="font-bold text-surface mb-1">Analíticas y Rendimiento</h4>
+                    <p class="text-xs text-gray-500">Nos ayudan a entender cómo interactúas con la web para mejorarla (ej. Google Analytics).</p>
+                </div>
+                <div>
+                    <input type="checkbox" id="check-analytics" class="w-5 h-5 text-brand rounded border-gray-300 focus:ring-brand cursor-pointer">
+                </div>
+            </div>
+
+            <!-- Marketing -->
+            <div class="flex items-start gap-4 p-4 bg-white rounded-lg border border-gray-200 transition-colors hover:border-brand/30">
+                <div class="flex-1">
+                    <h4 class="font-bold text-surface mb-1">Publicidad y Marketing</h4>
+                    <p class="text-xs text-gray-500">Permiten mostrarte publicidad personalizada según tus hábitos de navegación.</p>
+                </div>
+                <div>
+                    <input type="checkbox" id="check-marketing" class="w-5 h-5 text-brand rounded border-gray-300 focus:ring-brand cursor-pointer">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="p-6 border-t border-gray-100 bg-gray-50 flex justify-end gap-3 rounded-b-xl">
+            <button id="btn-save-preferences" class="px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-surface transition-colors shadow-lg">
+                Guardar Preferencias
+            </button>
+        </div>
+    </div>
+</div>
+
+<script is:inline>
+(function() {
+    console.log("[CIE Privacy] Script initializing...");
+    // --- COOKIE LOGIC ---
+    const CONSENT_KEY = 'cie_cookie_consent';
+
+    // Elements
+    const container = document.getElementById('cookie-consent-container');
+    const modal = document.getElementById('cookie-modal');
+    
+    // Buttons
+    const btnAcceptAll = document.getElementById('btn-accept-all');
+    const btnRejectAll = document.getElementById('btn-reject-all');
+    const btnManage = document.getElementById('btn-manage');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const btnSavePrefs = document.getElementById('btn-save-preferences');
+    
+    // Checkboxes
+    const checkAnalytics = document.getElementById('check-analytics');
+    const checkMarketing = document.getElementById('check-marketing');
+
+    // 1. Initialize
+    function init() {
+        console.log("[CIE Privacy] Checking saved consent...");
+        const savedConsent = localStorage.getItem(CONSENT_KEY);
+        
+        if (!savedConsent) {
+            console.log("[CIE Privacy] No consent found. Showing banner.");
+            // Show Banner after small delay for animation
+            setTimeout(() => {
+                if (container) {
+                     container.classList.remove('translate-y-full');
+                     console.log("[CIE Privacy] Banner visible class removed.");
+                } else {
+                     console.error("[CIE Privacy] Container #cookie-consent-container not found!");
+                }
+            }, 500);
+        } else {
+            console.log("[CIE Privacy] Consent found:", savedConsent);
+            const consent = JSON.parse(savedConsent);
+            applyConsent(consent);
+        }
+    }
+
+    // 2. Actions
+    function saveConsent(analytics, marketing) {
+        console.log("[CIE Privacy] Saving consent -> Analytics:", analytics, "Marketing:", marketing);
+        const consent = {
+            technical: true, // Always true
+            analytics: analytics,
+            marketing: marketing,
+            timestamp: new Date().toISOString()
+        };
+
+        localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+        applyConsent(consent);
+        hideBanner();
+        closeModalWithoutSaving(); 
+    }
+
+    function applyConsent(consent) {
+        console.log('[CIE Privacy] Applying consent rules:', consent);
+        if (consent.analytics) console.log('-> [Enabled] Analytics Scripts');
+        if (consent.marketing) console.log('-> [Enabled] Marketing Scripts');
+    }
+
+    function hideBanner() {
+        if (container) container.classList.add('translate-y-full');
+    }
+
+    function openModal() {
+        console.log("[CIE Privacy] Opening modal...");
+        // Restore checkbox state
+        const savedConsent = localStorage.getItem(CONSENT_KEY);
+        if (savedConsent) {
+            const consent = JSON.parse(savedConsent);
+            if (checkAnalytics) checkAnalytics.checked = consent.analytics;
+            if (checkMarketing) checkMarketing.checked = consent.marketing;
+        } else {
+            if (checkAnalytics) checkAnalytics.checked = false;
+            if (checkMarketing) checkMarketing.checked = false;
+        }
+
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            console.log("[CIE Privacy] Modal class 'hidden' removed.");
+        } else {
+             console.error("[CIE Privacy] Modal #cookie-modal not found!");
+        }
+    }
+
+    function closeModalWithoutSaving() {
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Expose globally
+    window.cieOpenPrivacyModal = openModal;
+    console.log("[CIE Privacy] window.cieOpenPrivacyModal attached.");
+
+    // 3. Event Listeners
+    if (btnAcceptAll) btnAcceptAll.addEventListener('click', () => saveConsent(true, true));
+    if (btnRejectAll) btnRejectAll.addEventListener('click', () => saveConsent(false, false));
+    if (btnManage) btnManage.addEventListener('click', openModal);
+    if (btnCloseModal) btnCloseModal.addEventListener('click', closeModalWithoutSaving);
+    
+    if (btnSavePrefs) {
+        btnSavePrefs.addEventListener('click', () => {
+            saveConsent(
+                checkAnalytics ? checkAnalytics.checked : false, 
+                checkMarketing ? checkMarketing.checked : false
+            );
+        });
+    }
+
+    // Start
+    init();
+})();
+</script>
