@@ -49,7 +49,7 @@ services:
 
       # SEGURIDAD: Basic Auth para proteger el Wizard el día 1 (Usuario: admin / Pass: setup2025)
       # Descomenta las líneas de abajo si quieres protegerlo antes de configurar:
-      - "traefik.http.middlewares.gl-auth.basicauth.users=admin:$apr1$Ndt7hT3k$S0zFw6ShqfNobB.JjE54.."
+      - "traefik.http.middlewares.gl-auth.basicauth.users=admin:$$apr1$$Ndt7hT3k$$S0zFw6ShqfNobB.JjE54.."
       - "traefik.http.routers.globaleaks.middlewares=gl-auth"
 
       # Servicio interno (apunta al puerto 80 del contenedor)
