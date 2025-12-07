@@ -31,14 +31,14 @@ services:
     environment:
       - GL_LETSENCRYPT_DISABLE=1
     expose:
-      - "80"
+      - "8082"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=dokploy-network"
       - "traefik.http.routers.globaleaks.rule=Host(`canaldenuncias.cieasesoria.com`)"
       - "traefik.http.routers.globaleaks.entrypoints=websecure"
       - "traefik.http.routers.globaleaks.tls.certresolver=letsencrypt"
-      - "traefik.http.services.globaleaks.loadbalancer.server.port=8080"
+      - "traefik.http.services.globaleaks.loadbalancer.server.port=8082"
     networks:
       - dokploy-network
 
