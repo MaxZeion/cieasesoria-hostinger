@@ -33,8 +33,9 @@ services:
     container_name: globaleaks
     restart: unless-stopped
     volumes:
-      # Persistencia en carpeta local ./globaleaks/data
-      - ./globaleaks/data:/var/globaleaks
+      # Usar un Volumen Nombrado de Docker es más seguro para la persistencia
+      # que una carpeta relativa en despliegues con Git.
+      - globaleaks_data:/var/globaleaks
     environment:
       # Desactivar manejo SSL interno para no competir con Traefik
       - GL_LETSENCRYPT_DISABLE=1
@@ -56,6 +57,10 @@ services:
       - "traefik.http.services.globaleaks.loadbalancer.server.port=80"
     networks:
       - dokploy-network
+
+volumes:
+  globaleaks_data:
+
 
 networks:
   dokploy-network:
