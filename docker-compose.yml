@@ -38,10 +38,12 @@ services:
       - "traefik.http.routers.globaleaks.rule=Host(`canaldenuncias.cieasesoria.com`)"
       - "traefik.http.routers.globaleaks.entrypoints=websecure"
       - "traefik.http.routers.globaleaks.tls.certresolver=letsencrypt"
-      # Conectar al backend HTTPS interno
+      # Conectar al backend HTTPS interno (self-signed cert)
       - "traefik.http.services.globaleaks.loadbalancer.server.port=443"
       - "traefik.http.services.globaleaks.loadbalancer.server.scheme=https"
-      - "traefik.http.services.globaleaks.loadbalancer.serversTransport=insecure@file"
+      # Definir serversTransport para ignorar SSL del backend
+      - "traefik.http.serversTransports.globaleaks-transport.insecureSkipVerify=true"
+      - "traefik.http.services.globaleaks.loadbalancer.serversTransport=globaleaks-transport@docker"
     networks:
       - dokploy-network
 
