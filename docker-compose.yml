@@ -8,6 +8,16 @@ services:
     restart: unless-stopped
     expose:
       - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.cieasesoria-web.rule=Host(`cieasesoria.com`) || Host(`www.cieasesoria.com`)"
+      - "traefik.http.routers.cieasesoria-web.entrypoints=websecure"
+      - "traefik.http.routers.cieasesoria-web.tls.certresolver=letsencrypt"
+      - "traefik.http.services.cieasesoria-web.loadbalancer.server.port=80"
+      - "traefik.http.routers.cieasesoria-web-http.rule=Host(`cieasesoria.com`) || Host(`www.cieasesoria.com`)"
+      - "traefik.http.routers.cieasesoria-web-http.entrypoints=web"
+      - "traefik.http.routers.cieasesoria-web-http.middlewares=redirect-to-https@file"
     networks:
       - dokploy-network
 
@@ -22,6 +32,13 @@ services:
       - GL_LETSENCRYPT_DISABLE=1
     expose:
       - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.globaleaks.rule=Host(`canaldenuncias.cieasesoria.com`)"
+      - "traefik.http.routers.globaleaks.entrypoints=websecure"
+      - "traefik.http.routers.globaleaks.tls.certresolver=letsencrypt"
+      - "traefik.http.services.globaleaks.loadbalancer.server.port=80"
     networks:
       - dokploy-network
 
