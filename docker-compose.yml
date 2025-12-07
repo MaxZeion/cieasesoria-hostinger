@@ -24,6 +24,9 @@ services:
       - "traefik.http.routers.cieasesoria-web-http.rule=Host(`cieasesoria.com`) || Host(`www.cieasesoria.com`)"
       - "traefik.http.routers.cieasesoria-web-http.entrypoints=web"
       - "traefik.http.routers.cieasesoria-web-http.middlewares=https-redirect"
+
+      # FIX: Forzar a Traefik a usar la red correcta
+      - "traefik.docker.network=dokploy-network"
     networks:
       - dokploy-network
 
