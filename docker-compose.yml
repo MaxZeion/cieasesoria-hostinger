@@ -18,6 +18,12 @@ services:
       - "traefik.http.routers.cieasesoria-web.tls.certresolver=letsencrypt"
       # Servicio interno
       - "traefik.http.services.cieasesoria-web.loadbalancer.server.port=80"
+
+      # REDIRECCIÓN HTTP -> HTTPS (Fix 404 en http://)
+      - "traefik.http.middlewares.https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.cieasesoria-web-http.rule=Host(`cieasesoria.com`) || Host(`www.cieasesoria.com`)"
+      - "traefik.http.routers.cieasesoria-web-http.entrypoints=web"
+      - "traefik.http.routers.cieasesoria-web-http.middlewares=https-redirect"
     networks:
       - dokploy-network
 

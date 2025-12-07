@@ -46,10 +46,4 @@ Debes hacerlo **directamente en Producción (VPS)**, es decir, entrando a la URL
 1.  **Accede a la URL**: `https://canaldenuncias.cieasesoria.com`.
 2.  **Wizard de Instalación**: Verás automáticamente el asistente de configuración.
     *   Te pedirá crear el usuario **Administrador**.
-    *   Configurarás el **Nombre de la Entidad** (CIE Asesoría).
-    *   Definirás los **Receptores** (quién recibe las denuncias).
-3.  **Personalización**:
-    *   Dentro del panel de admin, podrás subir el **Logotipo** y cambiar los colores para que coincidan con la web corporativa.
-    *   Configura el **Cuestionario** que rellenarán los denunciantes.
-
-**Nota Importante**: Toda esta configuración se guarda en la base de datos interna dentro de `/globaleaks/data` (en el servidor). No se sube nada de esto al Git por seguridad.
+    *   Configurarás el **Nombre de la Entidad** (CIE Asesoría).git catos interna dentro de `/globaleaks/data` (en el servidor). No se sube nada de esto al Git por seguridad.
