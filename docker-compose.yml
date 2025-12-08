@@ -45,58 +45,56 @@ services:
       - dokploy-network
 
   # Servicio C: CMS Database (PostgreSQL)
-  strapi-db:
+  cms-db:
     image: postgres:15-alpine
-    container_name: cieasesoria-strapi-db
+    container_name: cieasesoria-cms-db
     restart: unless-stopped
     environment:
-      - POSTGRES_DB=strapi
-      - POSTGRES_USER=strapi
-      - POSTGRES_PASSWORD=strapipassword123
+      POSTGRES_DB: directus
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: directuspassword123
     volumes:
-      - strapi_db_data:/var/lib/postgresql/data
+      - cms_db_data:/var/lib/postgresql/data
     networks:
       - dokploy-network
 
-  # Servicio D: CMS Admin (Strapi v4)
-  strapi:
-    image: naskio/strapi:latest
-    container_name: cieasesoria-strapi
+  # Servicio D: CMS Admin (Directus)
+  directus:
+    image: directus/directus:10
+    container_name: cieasesoria-directus
     restart: unless-stopped
     environment:
-      - DATABASE_CLIENT=postgres
-      - DATABASE_HOST=strapi-db
-      - DATABASE_PORT=5432
-      - DATABASE_NAME=strapi
-      - DATABASE_USERNAME=strapi
-      - DATABASE_PASSWORD=strapipassword123
-      - NODE_ENV=production
-      - APP_KEYS=cieasesoria1key,cieasesoria2key,cieasesoria3key,cieasesoria4key
-      - API_TOKEN_SALT=cieasesoriaapisalt123
-      - ADMIN_JWT_SECRET=cieasesoriajwt123secret
-      - JWT_SECRET=cieasesoriajwtsecret456
-      - STRAPI_ADMIN_CLIENT_URL=https://zeion.cieasesoria.com
-      - STRAPI_ADMIN_CLIENT_PREVIEW_SECRET=cieasesoriasecret
+      KEY: "cieasesoria-directus-key-123"
+      SECRET: "cieasesoria-directus-secret-456"
+      DB_CLIENT: pg
+      DB_HOST: cms-db
+      DB_PORT: 5432
+      DB_DATABASE: directus
+      DB_USER: directus
+      DB_PASSWORD: directuspassword123
+      ADMIN_EMAIL: "admin@cieasesoria.com"
+      ADMIN_PASSWORD: "CieAdmin2024!"
+      PUBLIC_URL: "https://zeion.cieasesoria.com"
     volumes:
-      - strapi_data:/srv/app
+      - directus_uploads:/directus/uploads
     expose:
-      - "1337"
+      - "8055"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=dokploy-network"
-      - "traefik.http.routers.strapi.rule=Host(`zeion.cieasesoria.com`)"
-      - "traefik.http.routers.strapi.entrypoints=websecure"
-      - "traefik.http.routers.strapi.tls.certresolver=letsencrypt"
-      - "traefik.http.services.strapi.loadbalancer.server.port=1337"
+      - "traefik.http.routers.directus.rule=Host(`zeion.cieasesoria.com`)"
+      - "traefik.http.routers.directus.entrypoints=websecure"
+      - "traefik.http.routers.directus.tls.certresolver=letsencrypt"
+      - "traefik.http.services.directus.loadbalancer.server.port=8055"
     depends_on:
-      - strapi-db
+      - cms-db
     networks:
       - dokploy-network
 
 volumes:
   globaleaks_data:
-  strapi_db_data:
-  strapi_data:
+  cms_db_data:
+  directus_uploads:
 
 
 networks:
