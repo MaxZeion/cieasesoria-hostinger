@@ -1,10 +1,12 @@
 ---
-title: "Estrenamos Nueva Web Corporativa"
-date: 2024-01-15
-author: "Equipo"
-image: "/assets/color-logo-no-background.svg"
-card_image: "/assets/white-logo-no-background.svg"
 draft: false
+author: Equipo
+card_image: /assets/white-logo-no-background.svg
+title: Estrenamos Nueva Web Corporativa
+date: 2024-01-08T00:00:00.000+00:00
+image: /assets/color-logo-no-background.svg
+category: NOVEDADES
+description: Estranamos nuevea web corporativa, digitilización completa del negocio
 ---
 
 ¡Bienvenidos al nuevo espacio digital!
