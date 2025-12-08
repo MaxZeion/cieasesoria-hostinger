@@ -49,8 +49,11 @@ const currentYear = new Date().getFullYear();
 
         if (openBtn) {
             openBtn.addEventListener("click", () => {
-                if (window.cieOpenPrivacyModal) {
-                    window.cieOpenPrivacyModal();
+                const win = window as Window & {
+                    cieOpenPrivacyModal?: () => void;
+                };
+                if (win.cieOpenPrivacyModal) {
+                    win.cieOpenPrivacyModal();
                 } else {
                     console.error(
                         "[Footer] cieOpenPrivacyModal not found on window",
