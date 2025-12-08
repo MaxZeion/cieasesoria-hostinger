@@ -16,7 +16,56 @@
 </head>
 
 <body>
+    <!-- Decap CMS will render here -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+        // Initialize CMS with config
+        CMS.init({
+            config: {
+                backend: {
+                    name: 'github',
+                    repo: 'MaxZeion/cieasesoria-hostinger',
+                    branch: 'main',
+                    base_url: 'https://zeion.cieasesoria.com',
+                    auth_endpoint: '/auth'
+                },
+                publish_mode: 'editorial_workflow',
+                media_folder: 'cieasesoria-web/public/assets/uploads',
+                public_folder: '/assets/uploads',
+                locale: 'es',
+                collections: [
+                    {
+                        name: 'news',
+                        label: 'Noticias',
+                        label_singular: 'Noticia',
+                        folder: 'cieasesoria-web/src/content/news',
+                        create: true,
+                        delete: true,
+                        slug: '{{slug}}',
+                        extension: 'md',
+                        format: 'frontmatter',
+                        fields: [
+                            { label: 'Título', name: 'title', widget: 'string', required: true },
+                            { label: 'Fecha de Publicación', name: 'date', widget: 'datetime', required: true },
+                            { 
+                                label: 'Categoría', 
+                                name: 'category', 
+                                widget: 'select',
+                                options: [
+                                    { label: 'Actualidad', value: 'ACTUALIDAD' },
+                                    { label: 'Novedades', value: 'NOVEDADES' },
+                                    { label: 'Normativa', value: 'NORMATIVA' }
+                                ],
+                                required: true 
+                            },
+                            { label: 'Descripción (SEO)', name: 'description', widget: 'text', required: true },
+                            { label: 'Contenido', name: 'body', widget: 'markdown', required: true }
+                        ]
+                    }
+                ]
+            }
+        });
+    </script>
 </body>
 
 </html>
