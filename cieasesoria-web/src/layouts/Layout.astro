@@ -41,8 +41,14 @@ const isHome = Astro.url.pathname === "/";
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Google Tag Manager -->
+    <Fragment
+      set:html={`<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WBWPKDM');</script>`}
+    />
+    <!-- End Google Tag Manager -->
 
     <!-- SEO keywords & author -->
     <meta
@@ -84,10 +90,10 @@ const isHome = Astro.url.pathname === "/";
         "image": "https://cieasesoria.com/assets/white-logo-no-background.svg",
         "@id": "https://cieasesoria.com",
         "url": "https://cieasesoria.com",
-        "telephone": "",
+        "telephone": "+34928948264",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "",
+          "streetAddress": "Avda. Constitución, 3 planta 1 pta 4",
           "addressLocality": "Gran Tarajal",
           "addressRegion": "Las Palmas",
           "postalCode": "35620",
@@ -113,6 +119,16 @@ const isHome = Astro.url.pathname === "/";
   <body
     class={`${themeClasses} ${isHome ? "is-home" : ""} font-sans min-h-screen flex flex-col overflow-x-hidden`}
   >
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-WBWPKDM"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
+
     <!-- Accessibility: Skip to Content -->
     <a
       href="#main-content"

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#07689f"/>
+  
+  <!-- Stylized "C" letter from logo -->
+  <path fill="#ffffff" d="
+    M50 15
+    C32 15 18 32 18 50
+    C18 68 32 85 50 85
+    C60 85 69 80 75 72
+    L65 62
+    C61 68 56 72 50 72
+    C39 72 31 62 31 50
+    C31 38 39 28 50 28
+    C56 28 61 32 65 38
+    L75 28
+    C69 20 60 15 50 15
+    Z
+  "/>
+  
+  <!-- Dot accent -->
+  <circle cx="72" cy="75" r="8" fill="#ffffff"/>
+</svg>
