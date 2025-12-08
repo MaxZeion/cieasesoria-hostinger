@@ -31,15 +31,15 @@ services:
     environment:
       - GL_LETSENCRYPT_DISABLE=1
     expose:
-      - "443"
+      - "8443"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=dokploy-network"
       - "traefik.http.routers.globaleaks.rule=Host(`canaldenuncias.cieasesoria.com`)"
       - "traefik.http.routers.globaleaks.entrypoints=websecure"
       - "traefik.http.routers.globaleaks.tls.certresolver=letsencrypt"
-      # Conectar al backend HTTPS interno
-      - "traefik.http.services.globaleaks.loadbalancer.server.port=443"
+      # Conectar al backend HTTPS interno (puerto 8443)
+      - "traefik.http.services.globaleaks.loadbalancer.server.port=8443"
       - "traefik.http.services.globaleaks.loadbalancer.server.scheme=https"
       - "traefik.http.services.globaleaks.loadbalancer.serversTransport=insecure@file"
     networks:
