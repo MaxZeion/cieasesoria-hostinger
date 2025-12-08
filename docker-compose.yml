@@ -58,9 +58,9 @@ services:
     networks:
       - dokploy-network
 
-  # Servicio D: CMS Admin (Strapi)
+  # Servicio D: CMS Admin (Strapi v4)
   strapi:
-    image: strapi/strapi:latest
+    image: naskio/strapi:latest
     container_name: cieasesoria-strapi
     restart: unless-stopped
     environment:
@@ -71,10 +71,12 @@ services:
       - DATABASE_USERNAME=strapi
       - DATABASE_PASSWORD=strapipassword123
       - NODE_ENV=production
-      - APP_KEYS=toBeModified1,toBeModified2,toBeModified3,toBeModified4
-      - API_TOKEN_SALT=toBeModifiedApiTokenSalt
-      - ADMIN_JWT_SECRET=toBeModifiedAdminJwtSecret
-      - JWT_SECRET=toBeModifiedJwtSecret
+      - APP_KEYS=cieasesoria1key,cieasesoria2key,cieasesoria3key,cieasesoria4key
+      - API_TOKEN_SALT=cieasesoriaapisalt123
+      - ADMIN_JWT_SECRET=cieasesoriajwt123secret
+      - JWT_SECRET=cieasesoriajwtsecret456
+      - STRAPI_ADMIN_CLIENT_URL=https://zeion.cieasesoria.com
+      - STRAPI_ADMIN_CLIENT_PREVIEW_SECRET=cieasesoriasecret
     volumes:
       - strapi_data:/srv/app
     expose:
