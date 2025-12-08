@@ -34,6 +34,10 @@ app.get('/auth', (req, res) => {
 app.get('/callback', async (req, res) => {
   const { code } = req.query;
 
+  if (!code) {
+    return res.status(400).send('Missing code parameter');
+  }
+
   try {
     const tokenParams = {
       code,
@@ -43,48 +47,64 @@ app.get('/callback', async (req, res) => {
     const accessToken = await client.getToken(tokenParams);
     const token = accessToken.token.access_token;
 
-    // Simplified callback script for Decap CMS
+    console.log('Token obtained successfully');
+
+    // Standard Netlify/Decap CMS OAuth callback format
+    const postMsgContent = JSON.stringify({
+      token: token,
+      provider: 'github'
+    });
+
     res.send(`<!DOCTYPE html>
 <html>
-<head><title>Auth Complete</title></head>
-<body>
-<script>
-(function() {
-  const token = "${token}";
-  const provider = "github";
-  
-  function sendMessage() {
-    const message = "authorization:" + provider + ":success:" + JSON.stringify({token: token, provider: provider});
-    if (window.opener) {
-      window.opener.postMessage(message, "*");
-      setTimeout(function() { window.close(); }, 1000);
-    }
-  }
-  
-  // Send immediately and also on message
-  sendMessage();
-  window.addEventListener("message", sendMessage);
-})();
-</script>
-<p>Autenticación completada. Esta ventana se cerrará automáticamente...</p>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Authorizing...</title>
+  </head>
+  <body>
+    <p>Autorización completada. Volviendo al CMS...</p>
+    <script>
+      (function() {
+        function recieveMessage(e) {
+          console.log("recieveMessage %o", e);
+          
+          // Send success message back to opener
+          window.opener.postMessage(
+            "authorization:github:success:" + ${JSON.stringify(postMsgContent)},
+            e.origin
+          );
+          
+          window.removeEventListener("message", recieveMessage, false);
+        }
+        
+        window.addEventListener("message", recieveMessage, false);
+        
+        // Send initial message to opener to trigger the handshake
+        console.log("Sending authorizing message to opener");
+        window.opener.postMessage("authorizing:github", "*");
+      })();
+    </script>
+  </body>
 </html>`);
   } catch (error) {
     console.error('OAuth Error:', error);
     res.status(500).send(`<!DOCTYPE html>
 <html>
-<head><title>Auth Error</title></head>
-<body>
-<script>
-(function() {
-  const message = "authorization:github:error:" + JSON.stringify({error: "${error.message}"});
-  if (window.opener) {
-    window.opener.postMessage(message, "*");
-  }
-})();
-</script>
-<p>Error de autenticación: ${error.message}</p>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Auth Error</title>
+  </head>
+  <body>
+    <p>Error: ${error.message}</p>
+    <script>
+      (function() {
+        window.opener.postMessage(
+          "authorization:github:error:" + ${JSON.stringify(JSON.stringify({ error: error.message }))},
+          "*"
+        );
+      })();
+    </script>
+  </body>
 </html>`);
   }
 });
