@@ -16,10 +16,15 @@
 </head>
 
 <body>
-    <!-- Decap CMS will render here -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Required root element for CMS -->
+    <div id="nc-root"></div>
+
+    <!-- Use specific version to avoid bugs -->
+    <script src="https://unpkg.com/decap-cms@3.0.12/dist/decap-cms.js"></script>
     <script>
-        // Initialize CMS with config
+        window.CMS_MANUAL_INIT = true;
+    </script>
+    <script>
         CMS.init({
             config: {
                 backend: {
@@ -29,7 +34,6 @@
                     base_url: 'https://zeion.cieasesoria.com',
                     auth_endpoint: '/auth'
                 },
-                // Direct publish mode (no drafts)
                 media_folder: 'cieasesoria-web/public/assets/uploads',
                 public_folder: '/assets/uploads',
                 locale: 'es',
@@ -47,16 +51,16 @@
                         fields: [
                             { label: 'Título', name: 'title', widget: 'string', required: true },
                             { label: 'Fecha de Publicación', name: 'date', widget: 'datetime', required: true },
-                            { 
-                                label: 'Categoría', 
-                                name: 'category', 
+                            {
+                                label: 'Categoría',
+                                name: 'category',
                                 widget: 'select',
                                 options: [
                                     { label: 'Actualidad', value: 'ACTUALIDAD' },
                                     { label: 'Novedades', value: 'NOVEDADES' },
                                     { label: 'Normativa', value: 'NORMATIVA' }
                                 ],
-                                required: true 
+                                required: true
                             },
                             { label: 'Descripción (SEO)', name: 'description', widget: 'text', required: true },
                             { label: 'Contenido', name: 'body', widget: 'markdown', required: true }
