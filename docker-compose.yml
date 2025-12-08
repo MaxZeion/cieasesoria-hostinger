@@ -44,51 +44,57 @@ services:
     networks:
       - dokploy-network
 
-  # Servicio C: CMS OAuth Provider
-  cms-oauth:
-    build:
-      context: ./cieasesoria-cms-oauth
-      dockerfile: Dockerfile
-    container_name: cieasesoria-cms-oauth
+  # Servicio C: CMS Database (PostgreSQL)
+  strapi-db:
+    image: postgres:15-alpine
+    container_name: cieasesoria-strapi-db
     restart: unless-stopped
     environment:
-      - OAUTH_CLIENT_ID=Ov23lis2cU0XonRFqKs9
-      - OAUTH_CLIENT_SECRET=d438b6228c34ddf04d79c1a93ef45f69f03fe9469
-      - ORIGIN=https://zeion.cieasesoria.com
-    expose:
-      - "3000"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=dokploy-network"
-      - "traefik.http.routers.cms-oauth.rule=Host(`zeion.cieasesoria.com`) && (PathPrefix(`/auth`) || PathPrefix(`/callback`))"
-      - "traefik.http.routers.cms-oauth.entrypoints=websecure"
-      - "traefik.http.routers.cms-oauth.tls.certresolver=letsencrypt"
-      - "traefik.http.services.cms-oauth.loadbalancer.server.port=3000"
+      - POSTGRES_DB=strapi
+      - POSTGRES_USER=strapi
+      - POSTGRES_PASSWORD=strapipassword123
+    volumes:
+      - strapi_db_data:/var/lib/postgresql/data
     networks:
       - dokploy-network
 
-  # Servicio D: CMS Admin Panel (static files)
-  cms:
-    build:
-      context: ./cieasesoria-cms
-      dockerfile: Dockerfile
-    container_name: cieasesoria-cms
+  # Servicio D: CMS Admin (Strapi)
+  strapi:
+    image: strapi/strapi:latest
+    container_name: cieasesoria-strapi
     restart: unless-stopped
+    environment:
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=strapi-db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=strapi
+      - DATABASE_USERNAME=strapi
+      - DATABASE_PASSWORD=strapipassword123
+      - NODE_ENV=production
+      - APP_KEYS=toBeModified1,toBeModified2,toBeModified3,toBeModified4
+      - API_TOKEN_SALT=toBeModifiedApiTokenSalt
+      - ADMIN_JWT_SECRET=toBeModifiedAdminJwtSecret
+      - JWT_SECRET=toBeModifiedJwtSecret
+    volumes:
+      - strapi_data:/srv/app
     expose:
-      - "80"
+      - "1337"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=dokploy-network"
-      - "traefik.http.routers.cms.rule=Host(`zeion.cieasesoria.com`)"
-      - "traefik.http.routers.cms.entrypoints=websecure"
-      - "traefik.http.routers.cms.tls.certresolver=letsencrypt"
-      - "traefik.http.services.cms.loadbalancer.server.port=80"
-      - "traefik.http.routers.cms.priority=1"
+      - "traefik.http.routers.strapi.rule=Host(`zeion.cieasesoria.com`)"
+      - "traefik.http.routers.strapi.entrypoints=websecure"
+      - "traefik.http.routers.strapi.tls.certresolver=letsencrypt"
+      - "traefik.http.services.strapi.loadbalancer.server.port=1337"
+    depends_on:
+      - strapi-db
     networks:
       - dokploy-network
 
 volumes:
   globaleaks_data:
+  strapi_db_data:
+  strapi_data:
 
 
 networks:
