@@ -52,8 +52,8 @@ services:
     container_name: cieasesoria-cms-oauth
     restart: unless-stopped
     environment:
-      - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}
-      - OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+      - OAUTH_CLIENT_ID=Ov23lis2cU0XonRFqKs9
+      - OAUTH_CLIENT_SECRET=d438b6228c34ddf04d79c1a93ef45f69f03fe9469
       - ORIGIN=https://zeion.cieasesoria.com
     expose:
       - "3000"
