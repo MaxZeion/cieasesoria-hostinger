@@ -38,7 +38,6 @@ services:
       - "traefik.http.routers.globaleaks.rule=Host(`canaldenuncias.cieasesoria.com`)"
       - "traefik.http.routers.globaleaks.entrypoints=websecure"
       - "traefik.http.routers.globaleaks.tls.certresolver=letsencrypt"
-      # Conectar al backend HTTPS interno (puerto 8443)
       - "traefik.http.services.globaleaks.loadbalancer.server.port=8443"
       - "traefik.http.services.globaleaks.loadbalancer.server.scheme=https"
       - "traefik.http.services.globaleaks.loadbalancer.serversTransport=insecure@file"
@@ -47,14 +46,14 @@ services:
 
   # Servicio C: CMS OAuth Provider
   cms-oauth:
-    image: vencax/netlify-cms-github-oauth-provider:latest
+    build:
+      context: ./cieasesoria-cms-oauth
+      dockerfile: Dockerfile
     container_name: cieasesoria-cms-oauth
     restart: unless-stopped
     environment:
-      # Set in Dokploy environment variables
-      - OAUTH_CLIENT_ID=${GITHUB_OAUTH_CLIENT_ID}
-      - OAUTH_CLIENT_SECRET=${GITHUB_OAUTH_CLIENT_SECRET}
-      - GIT_HOSTNAME=https://github.com
+      - OAUTH_CLIENT_ID=Ov23lis2cU0XonRFqKs9
+      - OAUTH_CLIENT_SECRET=d81f6316c9f636bfcf4d9e24d33e02d1bdf8dc9c
       - ORIGIN=https://zeion.cieasesoria.com
     expose:
       - "3000"
