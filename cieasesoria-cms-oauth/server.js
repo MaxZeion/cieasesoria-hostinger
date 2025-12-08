@@ -43,38 +43,49 @@ app.get('/callback', async (req, res) => {
     const accessToken = await client.getToken(tokenParams);
     const token = accessToken.token.access_token;
 
-    // Return the token to the CMS
-    const responseData = JSON.stringify({ token, provider: 'github' });
-    const script = `
-      <script>
-        (function() {
-          function receiveMessage(e) {
-            console.log("receiveMessage", e);
-            window.opener.postMessage(
-              'authorization:github:success:${responseData}',
-              e.origin
-            );
-            window.removeEventListener("message", receiveMessage, false);
-          }
-          window.addEventListener("message", receiveMessage, false);
-          window.opener.postMessage("authorizing:github", "*");
-        })();
-      </script>
-    `;
-    res.send(script);
+    // Simplified callback script for Decap CMS
+    res.send(`<!DOCTYPE html>
+<html>
+<head><title>Auth Complete</title></head>
+<body>
+<script>
+(function() {
+  const token = "${token}";
+  const provider = "github";
+  
+  function sendMessage() {
+    const message = "authorization:" + provider + ":success:" + JSON.stringify({token: token, provider: provider});
+    if (window.opener) {
+      window.opener.postMessage(message, "*");
+      setTimeout(function() { window.close(); }, 1000);
+    }
+  }
+  
+  // Send immediately and also on message
+  sendMessage();
+  window.addEventListener("message", sendMessage);
+})();
+</script>
+<p>Autenticación completada. Esta ventana se cerrará automáticamente...</p>
+</body>
+</html>`);
   } catch (error) {
     console.error('OAuth Error:', error);
-    const errorData = JSON.stringify({ error: error.message });
-    res.status(500).send(`
-      <script>
-        (function() {
-          window.opener.postMessage(
-            'authorization:github:error:${errorData}',
-            '*'
-          );
-        })();
-      </script>
-    `);
+    res.status(500).send(`<!DOCTYPE html>
+<html>
+<head><title>Auth Error</title></head>
+<body>
+<script>
+(function() {
+  const message = "authorization:github:error:" + JSON.stringify({error: "${error.message}"});
+  if (window.opener) {
+    window.opener.postMessage(message, "*");
+  }
+})();
+</script>
+<p>Error de autenticación: ${error.message}</p>
+</body>
+</html>`);
   }
 });
 
