@@ -3,7 +3,7 @@ backend:
   repo: MaxZeion/cieasesoria-hostinger
   branch: main
   base_url: https://zeion.cieasesoria.com
-  auth_endpoint: /oauth/callback
+  auth_endpoint: /auth
 
 # Publish mode - editorial workflow for drafts
 publish_mode: editorial_workflow
