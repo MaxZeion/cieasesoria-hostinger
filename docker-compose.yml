@@ -54,8 +54,9 @@ services:
       # GitHub OAuth credentials (set in Dokploy environment variables)
       - OAUTH_CLIENT_ID=${GITHUB_OAUTH_CLIENT_ID}
       - OAUTH_CLIENT_SECRET=${GITHUB_OAUTH_CLIENT_SECRET}
-      # Required: allowed origins for OAuth callback (plural!)
+      # Required: allowed origins for OAuth callback
       - ORIGINS=https://zeion.cieasesoria.com
+      - ORIGIN=https://zeion.cieasesoria.com
     volumes:
       - ./cieasesoria-cms/config.yml:/app/config.yml:ro
     expose:
