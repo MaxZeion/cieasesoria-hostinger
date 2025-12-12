@@ -27,7 +27,7 @@ services:
       - "traefik.http.middlewares.security-headers.headers.contentTypeNosniff=true"
       - "traefik.http.middlewares.security-headers.headers.browserXssFilter=true"
       - "traefik.http.middlewares.security-headers.headers.customResponseHeaders.Cross-Origin-Opener-Policy=same-origin"
-      - "traefik.http.middlewares.security-headers.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.recaptcha.net https://recaptcha.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google.com https://www.google-analytics.com https://www.recaptcha.net; frame-src https://www.google.com https://www.recaptcha.net https://recaptcha.google.com; object-src 'none'; base-uri 'self'"
+      - "traefik.http.middlewares.security-headers.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.google.com https://*.gstatic.com https://*.googletagmanager.com https://*.recaptcha.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://*.google.com https://*.google-analytics.com https://*.recaptcha.net; frame-src https://*.google.com https://*.recaptcha.net; object-src 'none'; base-uri 'self'"
     environment:
       - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
       - SMTP_PORT=${SMTP_PORT:-587}
