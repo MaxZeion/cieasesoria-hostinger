@@ -23,7 +23,7 @@ interface RecaptchaResponse {
 
 // Verify reCAPTCHA token with Google
 async function verifyRecaptcha(token: string): Promise<{ success: boolean; score: number }> {
-    const secretKey = import.meta.env.RECAPTCHA_SECRET_KEY;
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
     if (!secretKey) {
         console.warn('RECAPTCHA_SECRET_KEY not configured, skipping verification');
@@ -110,12 +110,12 @@ export const POST: APIRoute = async ({ request }) => {
             );
         }
 
-        // Get SMTP config from environment variables
-        const smtpHost = import.meta.env.SMTP_HOST || 'smtp.gmail.com';
-        const smtpPort = parseInt(import.meta.env.SMTP_PORT || '587');
-        const smtpUser = import.meta.env.SMTP_USER;
-        const smtpPass = import.meta.env.SMTP_PASS;
-        const contactEmailTo = import.meta.env.CONTACT_EMAIL_TO || 'cieasesoria@gmail.com';
+        // Get SMTP config from environment variables (use process.env for runtime access)
+        const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+        const smtpPort = parseInt(process.env.SMTP_PORT || '587');
+        const smtpUser = process.env.SMTP_USER;
+        const smtpPass = process.env.SMTP_PASS;
+        const contactEmailTo = process.env.CONTACT_EMAIL_TO || 'cieasesoria@gmail.com';
 
         // Validate SMTP config
         if (!smtpUser || !smtpPass) {
