@@ -15,6 +15,11 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the code
 COPY . .
 
+# Build-time arguments for Astro PUBLIC_* variables
+# These are embedded during build (import.meta.env.PUBLIC_*)
+ARG PUBLIC_RECAPTCHA_SITE_KEY
+ENV PUBLIC_RECAPTCHA_SITE_KEY=$PUBLIC_RECAPTCHA_SITE_KEY
+
 # Build the project (creates dist/ with server and client)
 RUN pnpm run build
 
