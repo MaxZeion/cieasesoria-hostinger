@@ -15,19 +15,31 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the code
 COPY . .
 
-# Build the project
+# Build the project (creates dist/ with server and client)
 RUN pnpm run build
 
-# Stage 2: Serve
-FROM nginx:alpine
+# Stage 2: Production
+FROM node:20-alpine AS production
 
-# Copy the build output from the builder stage
-# Default Astro output directory is dist/
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-# Optional: Custom Nginx config can be copied here if needed
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Enable corepack to use pnpm
+RUN corepack enable
 
-EXPOSE 80
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
 
-CMD ["nginx", "-g", "daemon off;"]
+# Install only production dependencies
+RUN pnpm install --frozen-lockfile --prod
+
+# Copy built assets from builder
+COPY --from=builder /app/dist ./dist
+
+# Astro Node adapter runs on port 4321 by default
+ENV HOST=0.0.0.0
+ENV PORT=4321
+
+EXPOSE 4321
+
+# Start the Node.js server
+CMD ["node", "./dist/server/entry.mjs"]

@@ -7,14 +7,14 @@ services:
     container_name: cieasesoria-web
     restart: unless-stopped
     expose:
-      - "80"
+      - "4321"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=dokploy-network"
       - "traefik.http.routers.cieasesoria-web.rule=Host(`cieasesoria.com`) || Host(`www.cieasesoria.com`)"
       - "traefik.http.routers.cieasesoria-web.entrypoints=websecure"
       - "traefik.http.routers.cieasesoria-web.tls.certresolver=letsencrypt"
-      - "traefik.http.services.cieasesoria-web.loadbalancer.server.port=80"
+      - "traefik.http.services.cieasesoria-web.loadbalancer.server.port=4321"
       - "traefik.http.routers.cieasesoria-web-http.rule=Host(`cieasesoria.com`) || Host(`www.cieasesoria.com`)"
       - "traefik.http.routers.cieasesoria-web-http.entrypoints=web"
       - "traefik.http.routers.cieasesoria-web-http.middlewares=redirect-to-https@file"
