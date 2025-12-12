@@ -1,5 +1,8 @@
 ---
 import { Mail, ShieldAlert } from "lucide-astro";
+
+// Get reCAPTCHA site key from environment
+const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
 ---
 
 <section id="contacto" class="py-20 px-8 bg-white text-surface">
@@ -9,7 +12,8 @@ import { Mail, ShieldAlert } from "lucide-astro";
                 Hablemos de tu Proyecto
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                Estamos listos para resolver tus dudas. Completa el formulario y envía tu consulta.
+                Estamos listos para resolver tus dudas. Completa el formulario y
+                envía tu consulta.
             </p>
         </div>
 
@@ -123,10 +127,25 @@ import { Mail, ShieldAlert } from "lucide-astro";
 
             <!-- Contact Form -->
             <form
-                action="#"
+                id="contact-form"
+                action="/api/contact"
                 method="POST"
                 class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 flex flex-col gap-6"
             >
+                <!-- Success/Error Messages -->
+                <div
+                    id="form-message"
+                    class="hidden p-4 rounded-lg text-center font-medium"
+                >
+                </div>
+
+                <!-- Hidden reCAPTCHA token field -->
+                <input
+                    type="hidden"
+                    id="recaptcha-token"
+                    name="recaptcha_token"
+                />
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col gap-2">
                         <label
@@ -194,6 +213,7 @@ import { Mail, ShieldAlert } from "lucide-astro";
                         id="privacidad"
                         name="privacidad"
                         required
+                        value="accepted"
                         class="mt-1 w-4 h-4 text-brand rounded border-gray-300 focus:ring-brand"
                     />
                     <label for="privacidad" class="text-sm text-gray-500">
@@ -208,11 +228,152 @@ import { Mail, ShieldAlert } from "lucide-astro";
 
                 <button
                     type="submit"
-                    class="mt-2 w-full px-8 py-4 bg-brand text-white font-bold rounded-lg shadow-lg hover:bg-brand-dark hover:-translate-y-1 transition-all duration-300"
+                    id="submit-btn"
+                    class="mt-2 w-full px-8 py-4 bg-brand text-white font-bold rounded-lg shadow-lg hover:bg-brand-dark hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
-                    Enviar Mensaje
+                    <span id="btn-text">Enviar Mensaje</span>
+                    <span id="btn-loading" class="hidden">
+                        <svg
+                            class="animate-spin inline-block w-5 h-5 mr-2"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle
+                                class="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                stroke-width="4"></circle>
+                            <path
+                                class="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                        </svg>
+                        Enviando...
+                    </span>
                 </button>
+
+                <!-- reCAPTCHA v3 branding (required by Google) -->
+                <p class="text-xs text-gray-400 text-center">
+                    Este sitio está protegido por reCAPTCHA y aplican la
+                    <a
+                        href="https://policies.google.com/privacy"
+                        class="underline hover:text-gray-600"
+                        target="_blank"
+                        rel="noopener">Política de Privacidad</a
+                    > y
+                    <a
+                        href="https://policies.google.com/terms"
+                        class="underline hover:text-gray-600"
+                        target="_blank"
+                        rel="noopener">Términos de Servicio</a
+                    > de Google.
+                </p>
             </form>
         </div>
     </div>
 </section>
+
+<!-- reCAPTCHA v3 Script -->
+<script is:inline define:vars={{ siteKey: recaptchaSiteKey }}>
+    // Store site key in window for form script
+    window.RECAPTCHA_SITE_KEY = siteKey;
+
+    // Load reCAPTCHA script dynamically
+    if (siteKey) {
+        const script = document.createElement("script");
+        script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+        script.async = true;
+        document.head.appendChild(script);
+    }
+</script>
+
+<script>
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const submitBtn = document.getElementById(
+        "submit-btn",
+    ) as HTMLButtonElement;
+    const btnText = document.getElementById("btn-text") as HTMLSpanElement;
+    const btnLoading = document.getElementById(
+        "btn-loading",
+    ) as HTMLSpanElement;
+    const formMessage = document.getElementById(
+        "form-message",
+    ) as HTMLDivElement;
+    const recaptchaTokenInput = document.getElementById(
+        "recaptcha-token",
+    ) as HTMLInputElement;
+
+    // Get site key from the inline script or window
+    const siteKey = (window as any).RECAPTCHA_SITE_KEY || "";
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Hide previous messages
+        formMessage.classList.add("hidden");
+
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.classList.add("hidden");
+        btnLoading.classList.remove("hidden");
+
+        try {
+            // Get reCAPTCHA token if available
+            if (typeof (window as any).grecaptcha !== "undefined" && siteKey) {
+                try {
+                    const grecaptcha = (window as any).grecaptcha;
+                    await new Promise<void>((resolve) => {
+                        grecaptcha.ready(() => resolve());
+                    });
+                    const token = await grecaptcha.execute(siteKey, {
+                        action: "contact_form",
+                    });
+                    recaptchaTokenInput.value = token;
+                } catch (recaptchaError) {
+                    console.warn("reCAPTCHA error:", recaptchaError);
+                    // Continue without reCAPTCHA token
+                }
+            }
+
+            const formData = new FormData(form);
+
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Success
+                formMessage.textContent = result.message;
+                formMessage.className =
+                    "p-4 rounded-lg text-center font-medium bg-green-100 text-green-800 border border-green-200";
+                formMessage.classList.remove("hidden");
+                form.reset();
+            } else {
+                // Error from server
+                formMessage.textContent = result.error;
+                formMessage.className =
+                    "p-4 rounded-lg text-center font-medium bg-red-100 text-red-800 border border-red-200";
+                formMessage.classList.remove("hidden");
+            }
+        } catch (error) {
+            // Network error
+            formMessage.textContent =
+                "Error de conexión. Por favor, inténtalo de nuevo.";
+            formMessage.className =
+                "p-4 rounded-lg text-center font-medium bg-red-100 text-red-800 border border-red-200";
+            formMessage.classList.remove("hidden");
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.classList.remove("hidden");
+            btnLoading.classList.add("hidden");
+        }
+    });
+</script>

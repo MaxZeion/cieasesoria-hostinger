@@ -1,16 +1,20 @@
 import { defineConfig } from 'astro/config';
-
 import tailwind from '@astrojs/tailwind';
-
 import sitemap from '@astrojs/sitemap';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
   // Required for Sitemap generation
   site: 'https://cieasesoria.com',
 
-  // Optimización para Nginx (Static)
-  output: 'static',
+  // Hybrid: Static pages + SSR for API routes
+  output: 'hybrid',
+
+  // Node adapter for SSR
+  adapter: node({
+    mode: 'standalone'
+  }),
 
   build: {
     // Genera carpetas tipo: /noticias/index.html en lugar de /noticias.html
@@ -22,6 +26,13 @@ export default defineConfig({
   server: {
     port: 4321,
     host: true
+  },
+
+  // Vite config for custom allowed hosts
+  vite: {
+    server: {
+      allowedHosts: ['cieasesoria.test', 'www.cieasesoria.test']
+    }
   },
 
   integrations: [
