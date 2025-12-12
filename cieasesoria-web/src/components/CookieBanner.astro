@@ -201,7 +201,6 @@
 
 <script is:inline>
     (function () {
-        console.log("[CIE Privacy] Script initializing...");
         // --- COOKIE LOGIC ---
         const CONSENT_KEY = "cie_cookie_consent";
 
@@ -222,26 +221,16 @@
 
         // 1. Initialize
         function init() {
-            console.log("[CIE Privacy] Checking saved consent...");
             const savedConsent = localStorage.getItem(CONSENT_KEY);
 
             if (!savedConsent) {
-                console.log("[CIE Privacy] No consent found. Showing banner.");
                 // Show Banner after small delay for animation
                 setTimeout(() => {
                     if (container) {
                         container.classList.remove("translate-y-full");
-                        console.log(
-                            "[CIE Privacy] Banner visible class removed.",
-                        );
-                    } else {
-                        console.error(
-                            "[CIE Privacy] Container #cookie-consent-container not found!",
-                        );
                     }
                 }, 500);
             } else {
-                console.log("[CIE Privacy] Consent found:", savedConsent);
                 const consent = JSON.parse(savedConsent);
                 applyConsent(consent);
             }
@@ -249,12 +238,6 @@
 
         // 2. Actions
         function saveConsent(analytics, marketing) {
-            console.log(
-                "[CIE Privacy] Saving consent -> Analytics:",
-                analytics,
-                "Marketing:",
-                marketing,
-            );
             const consent = {
                 technical: true, // Always true
                 analytics: analytics,
@@ -269,11 +252,7 @@
         }
 
         function applyConsent(consent) {
-            console.log("[CIE Privacy] Applying consent rules:", consent);
-            if (consent.analytics)
-                console.log("-> [Enabled] Analytics Scripts");
-            if (consent.marketing)
-                console.log("-> [Enabled] Marketing Scripts");
+            // Apply consent rules - enable/disable scripts based on consent
         }
 
         function hideBanner() {
@@ -281,7 +260,6 @@
         }
 
         function openModal() {
-            console.log("[CIE Privacy] Opening modal...");
             // Restore checkbox state
             const savedConsent = localStorage.getItem(CONSENT_KEY);
             if (savedConsent) {
@@ -296,9 +274,6 @@
             if (modal) {
                 modal.classList.remove("hidden");
                 document.body.style.overflow = "hidden";
-                console.log("[CIE Privacy] Modal class 'hidden' removed.");
-            } else {
-                console.error("[CIE Privacy] Modal #cookie-modal not found!");
             }
         }
 
@@ -311,7 +286,6 @@
 
         // Expose globally
         window.cieOpenPrivacyModal = openModal;
-        console.log("[CIE Privacy] window.cieOpenPrivacyModal attached.");
 
         // 3. Event Listeners
         if (btnAcceptAll)
