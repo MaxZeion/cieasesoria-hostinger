@@ -41,7 +41,11 @@ const services = [
                 services.map((service) => (
                     <div class="p-8 rounded-2xl bg-gray-50 border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:border-brand/30 transition-all duration-300 group">
                         <div class="mb-6 transform group-hover:scale-110 transition-transform duration-300 text-brand">
-                            <service.Icon size={48} strokeWidth={1.5} />
+                            <service.Icon
+                                size={48}
+                                strokeWidth={1.5}
+                                aria-hidden="true"
+                            />
                         </div>
                         <h3 class="font-serif text-2xl font-bold mb-4 text-surface">
                             {service.title}

@@ -139,7 +139,9 @@ const isHome = Astro.url.pathname === "/";
 
     <Header theme={theme} />
 
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
 
     <Footer />
     <CookieBanner />

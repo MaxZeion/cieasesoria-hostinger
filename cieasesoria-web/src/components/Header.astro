@@ -45,7 +45,13 @@ const { theme = "light" } = Astro.props;
         </nav>
 
         <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden z-50 text-white p-2">
+        <button
+            id="mobile-menu-btn"
+            class="md:hidden z-50 text-white p-2"
+            aria-label="Abrir menú de navegación"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+        >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -70,6 +76,8 @@ const { theme = "light" } = Astro.props;
     <!-- Mobile Menu Overlay -->
     <div
         id="mobile-menu"
+        role="dialog"
+        aria-label="Menú de navegación"
         class="fixed inset-0 bg-brand-dark/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 md:hidden flex justify-center items-center"
     >
         <nav class="flex flex-col gap-8 text-center text-white text-xl">
@@ -173,8 +181,14 @@ const { theme = "light" } = Astro.props;
 
     // Mobile Menu
     mobileBtn?.addEventListener("click", () => {
-        mobileMenu?.classList.toggle("translate-x-full");
+        const isOpen = mobileMenu?.classList.toggle("translate-x-full");
         document.body.classList.toggle("overflow-hidden");
+        // Update aria-expanded for accessibility
+        mobileBtn?.setAttribute("aria-expanded", isOpen ? "false" : "true");
+        mobileBtn?.setAttribute(
+            "aria-label",
+            isOpen ? "Abrir menú de navegación" : "Cerrar menú de navegación",
+        );
     });
 
     mobileLinks.forEach((link) => {

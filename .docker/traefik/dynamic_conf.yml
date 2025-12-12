@@ -1,0 +1,81 @@
+tls:
+  certificates:
+    - certFile: /etc/traefik/certs/local-cert.pem
+      keyFile: /etc/traefik/certs/local-key.pem
+
+http:
+  # ============================================
+  # MIDDLEWARES
+  # ============================================
+  middlewares:
+    security-headers:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        customResponseHeaders:
+          Cross-Origin-Opener-Policy: "same-origin"
+        contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google.com https://www.google-analytics.com; frame-src https://www.google.com; object-src 'none'; base-uri 'self'"
+
+  # ============================================
+  # ROUTERS
+  # ============================================
+  routers:
+    # Web Router
+    web-local:
+      rule: "Host(`www.cieasesoria.test`) || Host(`cieasesoria.test`)"
+      entryPoints:
+        - websecure
+      tls: {}
+      service: web-local
+      middlewares:
+        - security-headers
+
+    # Directus Router
+    directus-local:
+      rule: "Host(`zeion.cieasesoria.test`)"
+      entryPoints:
+        - websecure
+      tls: {}
+      service: directus-local
+
+    # GlobaLeaks Router
+    globaleaks-local:
+      rule: "Host(`canaldenuncias.cieasesoria.test`)"
+      entryPoints:
+        - websecure
+      tls: {}
+      service: globaleaks-local
+
+  # ============================================
+  # SERVICES
+  # ============================================
+  services:
+    # Web Service - Astro Dev Server
+    web-local:
+      loadBalancer:
+        servers:
+          - url: "http://cieasesoria-web-dev:4321"
+
+    # Directus Service
+    directus-local:
+      loadBalancer:
+        servers:
+          - url: "http://cieasesoria-directus:8055"
+
+    # GlobaLeaks Service (HTTPS backend)
+    globaleaks-local:
+      loadBalancer:
+        servers:
+          - url: "https://globaleaks:8443"
+        serversTransport: insecure
+
+  # ============================================
+  # SERVERS TRANSPORTS
+  # ============================================
+  serversTransports:
+    insecure:
+      insecureSkipVerify: true
