@@ -29,8 +29,7 @@ services:
       - "traefik.http.middlewares.security-headers.headers.contentTypeNosniff=true"
       - "traefik.http.middlewares.security-headers.headers.browserXssFilter=true"
       - "traefik.http.middlewares.security-headers.headers.customResponseHeaders.Cross-Origin-Opener-Policy=same-origin"
-      # CSP temporarily disabled to diagnose reCAPTCHA issue
-      # - "traefik.http.middlewares.security-headers.headers.contentSecurityPolicy=..."
+      - "traefik.http.middlewares.security-headers.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.recaptcha.net https://recaptcha.google.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://www.google.com https://www.google-analytics.com https://www.recaptcha.net https://region1.google-analytics.com; frame-src https://www.google.com https://www.recaptcha.net https://recaptcha.google.com; object-src 'none'; base-uri 'self'"
     environment:
       - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
       - SMTP_PORT=${SMTP_PORT:-587}
