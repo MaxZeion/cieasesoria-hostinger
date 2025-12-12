@@ -20,6 +20,8 @@ export default defineConfig({
     // Genera carpetas tipo: /noticias/index.html en lugar de /noticias.html
     // Esto es ideal para "pretty URLs" en Nginx sin configuración extra.
     format: 'directory',
+    // Inline small CSS to reduce render-blocking requests
+    inlineStylesheets: 'auto',
   },
 
   // Configuración de servidor de desarrollo (opcional)

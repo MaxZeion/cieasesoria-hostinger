@@ -8,12 +8,15 @@
     <div
         class="flex flex-col items-center text-center gap-12 max-w-[900px] w-full z-10"
     >
-        <!-- Logo Section -->
-        <div class="w-full flex justify-center animate-[scaleIn_1.2s_ease-out]">
+        <!-- Logo Section - No animation to improve LCP -->
+        <div class="w-full flex justify-center">
             <img
                 src="/assets/white-logo-no-background.svg"
                 alt="CIE Asesoría - Asesoría laboral, fiscal y contable en Canarias"
+                width="700"
+                height="504"
                 class="w-3/4 max-w-[700px] h-auto drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                fetchpriority="high"
             />
         </div>
 

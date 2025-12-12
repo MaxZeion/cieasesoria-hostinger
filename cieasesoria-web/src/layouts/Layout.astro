@@ -41,6 +41,23 @@ const isHome = Astro.url.pathname === "/";
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
+
+    <!-- Preload critical fonts to reduce CLS -->
+    <link
+      rel="preload"
+      href="/_astro/outfit-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/_astro/outfit-latin-600-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
 
