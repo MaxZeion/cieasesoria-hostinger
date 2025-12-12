@@ -1,0 +1,22 @@
+# Development Dockerfile for Astro with Hot Reload
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Enable corepack to use pnpm
+RUN corepack enable
+
+# Copy package files first for caching
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install
+
+# Copy the rest of the code (will be overwritten by volume mount)
+COPY . .
+
+# Expose Astro dev server port
+EXPOSE 4321
+
+# Start development server with host binding for Docker
+CMD ["pnpm", "run", "dev", "--host", "0.0.0.0"]

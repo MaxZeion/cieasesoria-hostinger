@@ -1,0 +1,90 @@
+# Local Development Override
+# This file is automatically merged with docker-compose.yml when running `docker compose up`
+
+services:
+  # ============================================
+  # TRAEFIK - Local Reverse Proxy with HTTPS
+  # ============================================
+  traefik:
+    image: traefik:v3.2
+    container_name: traefik-local
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080" # Traefik Dashboard
+    volumes:
+      - ./.docker/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./.docker/traefik/dynamic_conf.yml:/etc/traefik/dynamic_conf.yml:ro
+      - ./.docker/traefik/certs:/etc/traefik/certs:ro
+    networks:
+      - cieasesoria_local
+
+  # ============================================
+  # WEB - Astro Dev Server with Hot Reload
+  # ============================================
+  web:
+    build:
+      context: ./cieasesoria-web
+      dockerfile: Dockerfile.dev
+    container_name: cieasesoria-web-dev
+    restart: unless-stopped
+    volumes:
+      - ./cieasesoria-web:/app
+      - /app/node_modules # Prevent node_modules from being overwritten
+    env_file:
+      - ./cieasesoria-web/.env
+    environment:
+      - NODE_ENV=development
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web-local.rule=Host(`www.cieasesoria.test`) || Host(`cieasesoria.test`)"
+      - "traefik.http.routers.web-local.entrypoints=websecure"
+      - "traefik.http.routers.web-local.tls=true"
+      - "traefik.http.services.web-local.loadbalancer.server.port=4321"
+    networks:
+      - cieasesoria_local
+
+  # ============================================
+  # DIRECTUS - CMS Admin Panel
+  # ============================================
+  directus:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.directus-local.rule=Host(`zeion.cieasesoria.test`)"
+      - "traefik.http.routers.directus-local.entrypoints=websecure"
+      - "traefik.http.routers.directus-local.tls=true"
+      - "traefik.http.services.directus-local.loadbalancer.server.port=8055"
+    networks:
+      - cieasesoria_local
+
+  # ============================================
+  # GLOBALEAKS - Complaints Channel
+  # ============================================
+  globaleaks:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.globaleaks-local.rule=Host(`canaldenuncias.cieasesoria.test`)"
+      - "traefik.http.routers.globaleaks-local.entrypoints=websecure"
+      - "traefik.http.routers.globaleaks-local.tls=true"
+      - "traefik.http.services.globaleaks-local.loadbalancer.server.port=8443"
+      - "traefik.http.services.globaleaks-local.loadbalancer.server.scheme=https"
+      - "traefik.http.services.globaleaks-local.loadbalancer.serversTransport=insecure@file"
+    networks:
+      - cieasesoria_local
+
+  # ============================================
+  # CMS DATABASE - PostgreSQL
+  # ============================================
+  cms-db:
+    networks:
+      - cieasesoria_local
+
+# ============================================
+# LOCAL NETWORK (isolated from production)
+# ============================================
+networks:
+  cieasesoria_local:
+    driver: bridge
+  dokploy-network:
+    external: false # Override: don't require external network in local
