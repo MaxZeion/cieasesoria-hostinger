@@ -6,7 +6,7 @@ services:
   # TRAEFIK - Local Reverse Proxy with HTTPS
   # ============================================
   traefik:
-    image: traefik:v3.2
+    image: traefik:3.6
     container_name: traefik-local
     restart: unless-stopped
     ports:
