@@ -80,7 +80,7 @@ services:
 
   # Servicio D: CMS Admin (Directus)
   directus:
-    image: directus/directus:10
+    image: directus/directus:11
     container_name: cieasesoria-directus
     restart: unless-stopped
     environment:
