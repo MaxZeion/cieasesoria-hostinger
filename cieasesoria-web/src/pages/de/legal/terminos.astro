@@ -1,0 +1,92 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { useTranslations } from "../../../i18n";
+
+const lang = "de";
+const t = useTranslations(lang);
+---
+
+<Layout title={t.legal.terms.pageTitle} theme="light">
+    <main
+        class="pt-32 pb-20 px-6 max-w-4xl mx-auto prose prose-brand-dark lg:prose-lg"
+    >
+        <h1 class="font-serif text-4xl mb-8 text-surface">
+            {t.legal.terms.title}
+        </h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r">
+            <p class="text-blue-800 font-medium">
+                <strong>ℹ️ Hinweis:</strong> Diese Nutzungsbedingungen unterliegen
+                spanischem Recht. Die offizielle bindende Version ist die <a
+                    href="/legal/terminos"
+                    class="underline">spanische Version</a
+                >.
+            </p>
+        </div>
+
+        <p class="lead">Nutzungsbedingungen der Website.</p>
+
+        <hr class="border-gray-200 my-8" />
+
+        <p>
+            Die Nutzer garantieren und sind in jedem Fall für die
+            Wahrhaftigkeit, Genauigkeit, Gültigkeit und Authentizität der
+            bereitgestellten personenbezogenen Daten verantwortlich und
+            verpflichten sich, diese ordnungsgemäß zu aktualisieren.
+        </p>
+
+        <p>
+            Der Nutzer verpflichtet sich, die Website und die Dienste in
+            Übereinstimmung mit dem Gesetz, diesem rechtlichen Hinweis, den
+            besonderen Bedingungen einiger Dienste und mit der Moral, den
+            allgemein akzeptierten guten Sitten und der öffentlichen Ordnung zu
+            nutzen.
+        </p>
+
+        <h3>Verbote</h3>
+        <p>
+            Der Nutzer erklärt sich damit einverstanden, keine Informationen,
+            Daten, Inhalte, Nachrichten, Grafiken, Zeichnungen, Ton- und/oder
+            Bilddateien, Fotografien, Aufnahmen, Software und im Allgemeinen
+            kein Material zu übertragen, zu verbreiten oder Dritten zur
+            Verfügung zu stellen, das:
+        </p>
+        <ul>
+            <li>
+                Gegen gesetzlich anerkannte Grundrechte und öffentliche
+                Freiheiten verstößt.
+            </li>
+            <li>
+                Gegen das Recht auf Ehre, persönliche und familiäre Privatsphäre
+                verstößt.
+            </li>
+            <li>Illegale, irreführende oder unlautere Werbung darstellt.</li>
+            <li>
+                Viren oder andere Elemente enthält, die Systeme beschädigen
+                können.
+            </li>
+            <li>
+                Schwierigkeiten im normalen Betrieb des Dienstes verursacht.
+            </li>
+        </ul>
+
+        <h3>Zugangsbeschränkte Bereiche</h3>
+        <p>
+            Um auf zugangsbeschränkte Bereiche zuzugreifen, müssen die Nutzer
+            über die entsprechenden Zugangspasswörter verfügen. C.I.E.
+            FUERTEVENTURA, S.L. behält sich das Recht vor, die
+            Registrierungsanfrage eines Nutzers frei anzunehmen oder abzulehnen.
+            Die Nutzer sind für die Aufbewahrung ihrer Zugangspasswörter
+            verantwortlich.
+        </p>
+
+        <h3>Geistiges Eigentum</h3>
+        <p>
+            Alle Elemente, die das grafische Design der Websites, Menüs,
+            Navigationsschaltflächen, HTML-Code und im Allgemeinen alle Inhalte
+            und Informationen, auf die der Nutzer über die Webseiten von C.I.E.
+            FUERTEVENTURA, S.L. zugreifen kann, unterliegen gewerblichen und
+            geistigen Eigentumsrechten, Patenten, Marken oder Urheberrechten.
+        </p>
+    </main>
+</Layout>

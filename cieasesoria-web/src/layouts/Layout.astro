@@ -14,15 +14,26 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 
+import {
+  getLangFromUrl,
+  useTranslations,
+  getAlternateLinks,
+  type Locale,
+} from "../i18n";
+
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   theme?: "light" | "dark";
 }
 
+// Get current locale from URL
+const currentLang = getLangFromUrl(Astro.url) as Locale;
+const t = useTranslations(currentLang);
+
 const {
-  title = "CIE Asesoría - En Construcción",
-  description = "CIE Asesoría - Asesoría canaria online situada en Gran Tarajal. Expertos en gestión laboral, fiscal y contable.",
+  title = t.meta.title,
+  description = t.meta.description,
   theme = "dark", // Default to dark for Home
 } = Astro.props;
 
@@ -32,11 +43,21 @@ const themeClasses =
     ? "bg-corporate-gradient text-white"
     : "bg-white text-surface theme-light"; // Added theme-light class for CSS targeting
 
-const isHome = Astro.url.pathname === "/";
+// Check if we're on the home page (considering localized paths)
+const pathname = Astro.url.pathname;
+const isHome =
+  pathname === "/" ||
+  pathname === "/en" ||
+  pathname === "/en/" ||
+  pathname === "/de" ||
+  pathname === "/de/";
+
+// Get alternate language links for SEO
+const alternateLinks = getAlternateLinks(pathname, "https://cieasesoria.com");
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={currentLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -52,14 +73,23 @@ const isHome = Astro.url.pathname === "/";
     <!-- End Google Tag Manager -->
 
     <!-- SEO keywords & author -->
-    <meta
-      name="keywords"
-      content="asesoría canaria, asesoría online, Gran Tarajal, gestión laboral, fiscal, contable, CIE Asesoría"
-    />
+    <meta name="keywords" content={t.meta.keywords} />
     <meta name="author" content="CIE Asesoría" />
     <link
       rel="canonical"
       href={new URL(Astro.url.pathname, "https://cieasesoria.com")}
+    />
+
+    <!-- Alternate language links for SEO -->
+    {
+      alternateLinks.map(({ locale, href }) => (
+        <link rel="alternate" hreflang={locale} href={href} />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://cieasesoria.com/"
     />
 
     <!-- Open Graph / Facebook -->
@@ -70,6 +100,14 @@ const isHome = Astro.url.pathname === "/";
     <meta
       property="og:image"
       content="https://cieasesoria.com/assets/og-image.jpg"
+    />
+    <meta
+      property="og:locale"
+      content={currentLang === "es"
+        ? "es_ES"
+        : currentLang === "de"
+          ? "de_DE"
+          : "en_GB"}
     />
 
     <!-- Twitter -->
@@ -135,16 +173,16 @@ const isHome = Astro.url.pathname === "/";
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-primary focus:font-bold focus:shadow-xl focus:rounded pointer-events-none focus:pointer-events-auto"
     >
-      Saltar al contenido principal
+      {t.accessibility.skipToContent}
     </a>
 
-    <Header theme={theme} />
+    <Header theme={theme} lang={currentLang} />
 
     <main id="main-content">
       <slot />
     </main>
 
-    <Footer />
-    <CookieBanner />
+    <Footer lang={currentLang} />
+    <CookieBanner lang={currentLang} />
   </body>
 </html>

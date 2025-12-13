@@ -1,0 +1,113 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { useTranslations } from "../../i18n";
+
+const lang = "en";
+const t = useTranslations(lang);
+---
+
+<Layout title={t.legal.complaints.pageTitle} theme="light">
+    <main
+        class="pt-32 pb-20 px-6 max-w-4xl mx-auto prose prose-brand-dark lg:prose-lg"
+    >
+        <header class="text-center mb-12">
+            <h1 class="font-serif text-4xl md:text-5xl mb-4 text-surface">
+                {t.legal.complaints.title}
+            </h1>
+            <p class="text-xl md:text-2xl font-medium text-primary">
+                C.I.E. FUERTEVENTURA, S.L.
+            </p>
+        </header>
+
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-8 rounded-r">
+            <p class="text-amber-800 font-medium">
+                <strong>⚠️ {t.legal.complaints.warning}</strong>
+            </p>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r">
+            <p class="text-blue-800 font-medium">
+                <strong>ℹ️ Note:</strong> This complaints channel procedure is subject
+                to Spanish law. The full binding version is the <a
+                    href="/canal-de-denuncias"
+                    class="underline">Spanish version</a
+                >.
+            </p>
+        </div>
+
+        <hr class="border-gray-200 my-8" />
+
+        <h2>1. PURPOSE</h2>
+        <p>
+            The purpose of this procedure is to regulate the reception,
+            processing, investigation and resolution of complaints about alleged
+            irregularities or breaches committed by employees, commercial
+            agents, managers or business partners, which may arise in the course
+            of the business activity of C.I.E. FUERTEVENTURA, S.L.
+        </p>
+
+        <p>
+            The complaints channel of C.I.E. FUERTEVENTURA, S.L. is accessible
+            through the corporate website at <a
+                href="https://canaldenuncias.cieasesoria.com"
+                class="text-primary hover:underline"
+                >https://canaldenuncias.cieasesoria.com</a
+            >, facilitating its use by employees, commercial agents, managers,
+            business partners, and any interested party.
+        </p>
+
+        <h2>2. SCOPE OF APPLICATION</h2>
+        <p>
+            This procedure is applicable to all employees, commercial agents,
+            managers, and Board of Directors of C.I.E. FUERTEVENTURA, S.L.
+        </p>
+
+        <h2>3. KEY ASPECTS OF THE COMPLAINTS CHANNEL</h2>
+
+        <h3>3.1 Duty to Report</h3>
+        <p>
+            Anyone who has well-founded knowledge of any type of act or fact
+            that could contravene the principles and values of the Code of
+            Ethics or Conduct or constitute an illegal act must report it
+            through the established channel.
+        </p>
+
+        <h3>3.2 Reportable Facts</h3>
+        <p>
+            Reportable facts must be focused on behaviors, breaches or
+            irregularities that may go against the principles and values of the
+            Code of Ethics and Conduct, or constitute an illegal act.
+        </p>
+
+        <h3>3.3 Rights of the Whistleblower</h3>
+        <ul>
+            <li><strong>Right to receive prior information</strong></li>
+            <li><strong>Right to restrictive use of information</strong></li>
+            <li><strong>Right to anonymity</strong></li>
+            <li><strong>Right to confidentiality</strong></li>
+            <li>
+                <strong
+                    >Right to receive a response within a reasonable time</strong>
+            </li>
+            <li>
+                <strong
+                    >Right to a transparent investigation with an impartial
+                    interlocutor</strong>
+            </li>
+            <li><strong>Rights derived from Data Protection</strong></li>
+            <li><strong>Right to choose</strong></li>
+            <li><strong>Right to non-retaliation</strong></li>
+        </ul>
+
+        <hr class="border-gray-200 my-12" />
+
+        <div class="text-center mt-12">
+            <a
+                href="https://canaldenuncias.cieasesoria.com"
+                class="inline-block bg-primary text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-primary/90 transition-colors no-underline shadow-lg hover:shadow-xl"
+            >
+                🛡️ {t.legal.complaints.cta}
+            </a>
+        </div>
+    </main>
+</Layout>

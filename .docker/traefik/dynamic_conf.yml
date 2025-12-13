@@ -18,7 +18,7 @@ http:
         browserXssFilter: true
         customResponseHeaders:
           Cross-Origin-Opener-Policy: "same-origin"
-        contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google.com https://www.google-analytics.com; frame-src https://www.google.com; object-src 'none'; base-uri 'self'"
+        contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.recaptcha.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google.com https://www.google-analytics.com https://www.recaptcha.net; frame-src https://www.google.com https://www.recaptcha.net; object-src 'none'; base-uri 'self'"
 
   # ============================================
   # ROUTERS
@@ -54,11 +54,12 @@ http:
   # SERVICES
   # ============================================
   services:
-    # Web Service - Astro Dev Server
+    # Web Service - Astro Dev Server (HTTPS)
     web-local:
       loadBalancer:
         servers:
-          - url: "http://cieasesoria-web-dev:4321"
+          - url: "https://cieasesoria-web-dev:4321"
+        serversTransport: insecure
 
     # Directus Service
     directus-local:

@@ -1,0 +1,66 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { useTranslations } from "../../../i18n";
+
+const lang = "de";
+const t = useTranslations(lang);
+---
+
+<Layout title={t.legal.legalNotice.pageTitle} theme="light">
+    <main
+        class="pt-32 pb-20 px-6 max-w-4xl mx-auto prose prose-brand-dark lg:prose-lg"
+    >
+        <h1 class="font-serif text-4xl mb-8 text-surface">
+            {t.legal.legalNotice.title}
+        </h1>
+
+        <hr class="border-gray-200 my-8" />
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r">
+            <p class="text-blue-800 font-medium">
+                <strong>ℹ️ Hinweis:</strong> Dieses Impressum unterliegt spanischem
+                Recht. Die offizielle bindende Version ist die <a
+                    href="/legal/aviso-legal"
+                    class="underline">spanische Version</a
+                >.
+            </p>
+        </div>
+
+        <p class="lead">
+            Die folgenden Informationen werden den Dienstempfängern und
+            zuständigen Behörden über den Anbieter von Diensten der
+            Informationsgesellschaft klar und unmissverständlich zur Verfügung
+            gestellt:
+        </p>
+
+        <h3>IDENTIFIKATIONSDATEN</h3>
+        <ul>
+            <li>
+                <strong>FIRMENNAME:</strong> C.I.E. FUERTEVENTURA, S.L.
+            </li>
+            <li><strong>STEUER-ID (CIF/NIF):</strong> B76041508</li>
+            <li>
+                <strong>GESCHÄFTSTÄTIGKEIT:</strong> BERATUNG, VERWALTUNG UND VERMITTLUNG
+            </li>
+            <li>
+                <strong>GESCHÄFTSADRESSE:</strong> AVDA DE LA CONSTITUCIÓN, 3 – ETAGE
+                1 TÜR 4 – GRAN TARAJAL – 35620 LAS PALMAS, SPANIEN
+            </li>
+            <li><strong>TELEFON/FAX:</strong> 928 94 82 64 / 902 009 842</li>
+            <li>
+                <strong>E-MAIL-ADRESSE:</strong>
+                <a href="mailto:rgpd@cieasesoria.es">rgpd@cieasesoria.es</a>
+            </li>
+            <li>
+                <strong>WEBSEITE:</strong>
+                <a href="https://www.cieasesoria.com/" target="_blank"
+                    >www.cieasesoria.com</a
+                >
+            </li>
+            <li>
+                <strong>HANDELSREGISTERDATEN:</strong> HANDELSREGISTER PUERTO DEL
+                ROSARIO, BLATT 132, BAND 142, EINTRAGUNG IF-6458
+            </li>
+        </ul>
+    </main>
+</Layout>

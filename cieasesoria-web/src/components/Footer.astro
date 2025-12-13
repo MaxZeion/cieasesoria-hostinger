@@ -1,5 +1,13 @@
 ---
 import { ShieldAlert } from "lucide-astro";
+import { useTranslations, getLocalizedPath, type Locale } from "../i18n";
+
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
 
 const currentYear = new Date().getFullYear();
 ---
@@ -16,29 +24,31 @@ const currentYear = new Date().getFullYear();
 
         <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <a
-                href="/legal/aviso-legal"
-                class="hover:text-brand transition-colors">Aviso Legal</a
-            >
-            <a href="/legal/terminos" class="hover:text-brand transition-colors"
-                >Términos de Servicio</a
-            >
-            <a
-                href="/legal/privacidad"
+                href={getLocalizedPath("/legal/aviso-legal", lang)}
                 class="hover:text-brand transition-colors"
-                >Política de Privacidad</a
+                >{t.footer.legalNotice}</a
             >
             <a
-                href="/canal-de-denuncias"
+                href={getLocalizedPath("/legal/terminos", lang)}
+                class="hover:text-brand transition-colors">{t.footer.terms}</a
+            >
+            <a
+                href={getLocalizedPath("/legal/privacidad", lang)}
+                class="hover:text-brand transition-colors">{t.footer.privacy}</a
+            >
+            <a
+                href={getLocalizedPath("/canal-de-denuncias", lang)}
                 class="hover:text-brand transition-colors flex items-center gap-1"
             >
-                <ShieldAlert size={14} /> Canal de Denuncias
+                <ShieldAlert size={14} />
+                {t.footer.complaints}
             </a>
             <button
                 type="button"
                 id="footer-privacy-btn"
                 class="hover:text-brand transition-colors cursor-pointer text-gray-500 bg-transparent border-none p-0 font-inherit"
             >
-                Cookies
+                {t.footer.cookies}
             </button>
         </nav>
     </div>

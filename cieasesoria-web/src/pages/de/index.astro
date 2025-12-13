@@ -1,15 +1,14 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import Stats from "../components/Stats.astro";
-import Services from "../components/Services.astro";
-import About from "../components/About.astro";
-import Contact from "../components/Contact.astro";
-import Technology from "../components/Technology.astro";
-import { getLangFromUrl, useTranslations, type Locale } from "../i18n";
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import Stats from "../../components/Stats.astro";
+import Services from "../../components/Services.astro";
+import About from "../../components/About.astro";
+import Contact from "../../components/Contact.astro";
+import Technology from "../../components/Technology.astro";
+import { useTranslations } from "../../i18n";
 
-// Get current language
-const lang = getLangFromUrl(Astro.url) as Locale;
+const lang = "de";
 const t = useTranslations(lang);
 ---
 
@@ -25,7 +24,6 @@ const t = useTranslations(lang);
 </Layout>
 
 <style>
-    /* Animations kept in CSS if Tailwind config doesn't have them, or use arbitrary values in config */
     @keyframes scaleIn {
         from {
             opacity: 0;

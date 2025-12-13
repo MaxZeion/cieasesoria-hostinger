@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "about": "Nosotros",
+    "news": "Noticias",
+    "contact": "Contactar"
+  },
+  "header": {
+    "openMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú de navegación"
+  },
+  "hero": {
+    "title": "Asesoría Laboral, Fiscal y Contable online en Canarias",
+    "subtitle": "Experiencia, tecnología y cercanía al servicio de tu empresa.",
+    "cta": "Contactar Ahora",
+    "ctaSecondary": "Nuestros Servicios",
+    "logoAlt": "CIE Asesoría - Asesoría laboral, fiscal y contable en Canarias"
+  },
+  "stats": {
+    "years": "Años de trayectoria",
+    "companies": "Empresas Gestionadas",
+    "support": "Soporte Integral"
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "description": "Ofrecemos una gestión 360º para autónomos y pymes, combinando la experiencia técnica con la última tecnología.",
+    "labor": {
+      "title": "Laboral",
+      "description": "Gestión integral de nóminas, seguros sociales y contratación. Asesoramiento jurídico-laboral continuo para su tranquilidad."
+    },
+    "fiscal": {
+      "title": "Fiscal",
+      "description": "Planificación fiscal eficiente, presentación de impuestos y representación ante la Agencia Tributaria."
+    },
+    "accounting": {
+      "title": "Contable",
+      "description": "Contabilidad al día, análisis de balances y libros oficiales. Información clara para la toma de decisiones."
+    },
+    "learnMore": "Saber más"
+  },
+  "about": {
+    "title": "Tu empresa,",
+    "titleHighlight": "un ecosistema conectado e inteligente",
+    "description": "Entendemos tu negocio como una red viva. No gestionamos documentos aislados; integramos tus datos fiscales, laborales y contables para crear una visión global y fluida de tu actividad.",
+    "feature1": "Sincronización total de datos",
+    "feature2": "Visión 360º de tu crecimiento",
+    "feature3": "Gestión proactiva y sin fricción",
+    "imageTitle": "Ecosistema Digital",
+    "imageDescription": "Gestión unificada y sin barreras.",
+    "imageAlt": "Estructura y solidez empresarial",
+    "newsButton": "Conoce nuestras novedades"
+  },
+  "contact": {
+    "title": "Hablemos de tu Proyecto",
+    "description": "Estamos listos para resolver tus dudas. Completa el formulario y envía tu consulta.",
+    "nameLabel": "Nombre completo",
+    "namePlaceholder": "Tu nombre",
+    "phoneLabel": "Teléfono",
+    "phonePlaceholder": "Tu teléfono",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tucorreo@ejemplo.com",
+    "messageLabel": "Mensaje",
+    "messagePlaceholder": "¿En qué podemos ayudarte?",
+    "privacyLabel": "He leído y acepto la",
+    "privacyLink": "política de privacidad",
+    "privacyLabelEnd": "y autorizo el tratamiento de mis datos para responder a esta consulta.",
+    "submitButton": "Enviar Mensaje",
+    "submitting": "Enviando...",
+    "recaptchaNotice": "Este sitio está protegido por reCAPTCHA y aplican la",
+    "googlePrivacy": "Política de Privacidad de Google",
+    "googleTerms": "Términos de Servicio de Google",
+    "successMessage": "¡Mensaje enviado correctamente!",
+    "errorMessage": "Error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+    "connectionError": "Error de conexión. Por favor, inténtalo de nuevo."
+  },
+  "footer": {
+    "legalNotice": "Aviso Legal",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad",
+    "complaints": "Canal de Denuncias",
+    "cookies": "Cookies"
+  },
+  "cookies": {
+    "title": "Valoramos tu Privacidad",
+    "description": "Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el tráfico y personalizar contenido. Puedes aceptar todas, rechazarlas o configurar tus preferencias. Más información en nuestra",
+    "policyLink": "Política de Cookies",
+    "configure": "Configurar",
+    "rejectAll": "Rechazar",
+    "acceptAll": "Aceptar Todas",
+    "modalTitle": "Configuración de Cookies",
+    "modalClose": "Cerrar configuración de cookies",
+    "modalDescription": "Aquí puedes seleccionar qué categorías de cookies deseas autorizar. Las cookies técnicas son necesarias para que el sitio web funcione correctamente y no se pueden desactivar.",
+    "technical": {
+      "title": "Técnicas y Necesarias",
+      "badge": "Obligatorias",
+      "description": "Permiten la navegación y el acceso a áreas seguras del sitio web."
+    },
+    "analytics": {
+      "title": "Analíticas y Rendimiento",
+      "description": "Nos ayudan a entender cómo interactúas con la web para mejorarla (ej. Google Analytics)."
+    },
+    "marketing": {
+      "title": "Publicidad y Marketing",
+      "description": "Permiten mostrarte publicidad personalizada según tus hábitos de navegación."
+    },
+    "savePreferences": "Guardar Preferencias"
+  },
+  "accessibility": {
+    "skipToContent": "Saltar al contenido principal"
+  },
+  "meta": {
+    "title": "Asesoría online en Canarias",
+    "description": "CIE Asesoría - Asesoría canaria online situada en Gran Tarajal. Expertos en gestión laboral, fiscal y contable.",
+    "keywords": "asesoría canaria, asesoría online, Gran Tarajal, gestión laboral, fiscal, contable, CIE Asesoría"
+  },
+  "languages": {
+    "es": "Español",
+    "en": "English",
+    "de": "Deutsch",
+    "select": "Seleccionar idioma"
+  },
+  "technology": {
+    "badge": "Innovación Digital",
+    "title": "Tecnología al servicio de",
+    "titleHighlight": "tu tranquilidad",
+    "description": "Olvídate del papeleo y las gestiones complejas. Nuestra plataforma en la nube te permite tener el control total de tu negocio desde cualquier lugar.",
+    "secureArea": {
+      "title": "Área de Clientes Segura",
+      "description": "Accede a tus documentos, impuestos y nóminas 24/7 con máxima seguridad."
+    },
+    "realTime": {
+      "title": "Información en Tiempo Real",
+      "description": "Visualiza el estado de tu empresa con gráficos intuitivos y actualizados."
+    },
+    "cta": "Solicitar Demo",
+    "imageAlt": "Ilustración tecnológica de gestión empresarial",
+    "status": "Estado",
+    "taxesUpToDate": "Impuestos al día",
+    "payroll": "Nóminas",
+    "sending": "Enviando... 100%",
+    "growth": "Crecimiento +24%"
+  },
+  "legal": {
+    "legalNotice": {
+      "title": "Aviso Legal",
+      "pageTitle": "Aviso Legal | CIE Asesoría"
+    },
+    "privacy": {
+      "title": "Política de Privacidad",
+      "pageTitle": "Política de Privacidad | CIE Asesoría"
+    },
+    "terms": {
+      "title": "Términos de Servicio",
+      "pageTitle": "Términos de Servicio | CIE Asesoría"
+    },
+    "complaints": {
+      "title": "Canal de Denuncias",
+      "pageTitle": "Canal de Denuncias | CIE Asesoría",
+      "cta": "COMUNICAR DENUNCIA",
+      "warning": "Importante: Lea atentamente el procedimiento de gestión de denuncias antes de acceder al canal"
+    }
+  }
+}

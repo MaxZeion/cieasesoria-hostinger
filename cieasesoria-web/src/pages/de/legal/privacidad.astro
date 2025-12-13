@@ -1,0 +1,86 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { useTranslations } from "../../../i18n";
+
+const lang = "de";
+const t = useTranslations(lang);
+---
+
+<Layout title={t.legal.privacy.pageTitle} theme="light">
+    <main
+        class="pt-32 pb-20 px-6 max-w-4xl mx-auto prose prose-brand-dark lg:prose-lg"
+    >
+        <h1 class="font-serif text-4xl mb-8 text-surface">
+            {t.legal.privacy.title}
+        </h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r">
+            <p class="text-blue-800 font-medium">
+                <strong>ℹ️ Hinweis:</strong> Diese Datenschutzrichtlinie unterliegt
+                dem spanischen und europäischen Datenschutzrecht. Die offizielle bindende
+                Version ist die <a href="/legal/privacidad" class="underline"
+                    >spanische Version</a
+                >.
+            </p>
+        </div>
+
+        <p class="lead">
+            Ziel der Datenschutzrichtlinie von C.I.E. FUERTEVENTURA, S.L. ist
+            der Schutz von Informationen im Internet und der Daten, die der
+            Nutzer auf der Website eingeben kann, in Übereinstimmung mit den
+            geltenden Rechtsvorschriften (DSGVO und spanisches LOPD).
+        </p>
+
+        <p>
+            Die Nutzung und Navigation auf der Website sowie das Ausfüllen von
+            Formularen bedeutet die Zustimmung des Nutzers zu dieser
+            Datenschutzrichtlinie.
+        </p>
+
+        <hr class="border-gray-200 my-8" />
+
+        <h3>Verwendung und Verarbeitung personenbezogener Daten</h3>
+        <p>
+            In Übereinstimmung mit den geltenden Vorschriften informieren wir
+            Sie, dass die bereitgestellten Daten sowie die aus Ihrer Navigation
+            abgeleiteten Daten in Dateien gespeichert werden können, die C.I.E.
+            FUERTEVENTURA, S.L. gehören, die nur zum Zweck der Bearbeitung Ihrer
+            Anfrage, der Verwaltung des angeforderten Dienstes und der
+            Aufrechterhaltung der in den abonnierten Formularen festgelegten
+            Beziehung darauf zugreifen wird.
+        </p>
+
+        <h3>Sicherheitsmaßnahmen</h3>
+        <p>
+            C.I.E. FUERTEVENTURA, S.L. hat die notwendigen technischen und
+            organisatorischen Sicherheitsmaßnahmen implementiert, um die
+            Sicherheit Ihrer personenbezogenen Daten zu gewährleisten und ihre
+            Änderung, ihren Verlust und ihre unbefugte Behandlung und/oder den
+            unbefugten Zugriff zu verhindern.
+        </p>
+
+        <h3>
+            Ausübung der Rechte: Zugang, Berichtigung, Löschung und Widerspruch
+        </h3>
+        <p>
+            Personen, die ihre Daten an C.I.E. FUERTEVENTURA, S.L. übermittelt
+            haben, können sich an uns wenden, um ihre Rechte auf Zugang,
+            Berichtigung, Löschung und Widerspruch bezüglich der in unseren
+            Dateien enthaltenen Daten auszuüben.
+        </p>
+        <p>
+            Der Betroffene kann seine Rechte durch schriftliche Mitteilung an
+            C.I.E. FUERTEVENTURA, S.L. an folgende Adresse ausüben: Avda. de la
+            Constitución, 3 Etage 1 Tür 4, Gran Tarajal 35620 LAS PALMAS, oder
+            per E-Mail an
+            <a href="mailto:cieasesoria@gmail.com">cieasesoria@gmail.com</a>
+        </p>
+
+        <h3>Minderjährige</h3>
+        <p>
+            Die von dieser Website angebotenen Dienste richten sich nicht an
+            Minderjährige unter 14 Jahren, daher sollten keine Daten dieser
+            Personen angegeben werden.
+        </p>
+    </main>
+</Layout>

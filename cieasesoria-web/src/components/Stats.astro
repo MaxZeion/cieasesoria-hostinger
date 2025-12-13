@@ -1,5 +1,12 @@
 ---
+import { useTranslations, type Locale } from "../i18n";
 
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
@@ -16,7 +23,7 @@
             </span>
             <span
                 class="text-xs md:text-sm font-bold tracking-widest text-gray-600 uppercase"
-                >Años de trayectoria</span
+                >{t.stats.years}</span
             >
         </div>
 
@@ -28,7 +35,7 @@
             </span>
             <span
                 class="text-xs md:text-sm font-bold tracking-widest text-gray-600 uppercase"
-                >Empresas Gestionadas</span
+                >{t.stats.companies}</span
             >
         </div>
 
@@ -41,7 +48,7 @@
             </span>
             <span
                 class="text-xs md:text-sm font-bold tracking-widest text-gray-600 uppercase"
-                >Soporte Integral</span
+                >{t.stats.support}</span
             >
         </div>
     </div>

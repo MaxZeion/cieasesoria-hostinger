@@ -1,5 +1,23 @@
 ---
-const { theme = "light" } = Astro.props;
+import {
+    useTranslations,
+    getLocalizedPath,
+    languageInfo,
+    locales,
+    type Locale,
+} from "../i18n";
+
+interface Props {
+    theme?: "light" | "dark";
+    lang?: Locale;
+}
+
+const { theme = "light", lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
+// Get the current path without locale prefix for language switching
+const currentPath = Astro.url.pathname;
+const pathWithoutLocale = currentPath.replace(/^\/(en|de)/, "") || "/";
 ---
 
 <header
@@ -8,7 +26,7 @@ const { theme = "light" } = Astro.props;
 >
     <div class="max-w-[1400px] mx-auto flex justify-between items-center">
         <!-- Logo -->
-        <a href="/" class="z-50 relative">
+        <a href={getLocalizedPath("/", lang)} class="z-50 relative">
             <img
                 id="header-logo"
                 src="/assets/white-logo-no-background.svg"
@@ -22,27 +40,81 @@ const { theme = "light" } = Astro.props;
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center gap-8">
             <a
-                href="/#servicios"
+                href={getLocalizedPath("/#servicios", lang)}
                 class="nav-link text-white/90 hover:text-white font-medium transition-colors"
-                >Servicios</a
+                >{t.nav.services}</a
             >
             <a
-                href="/#nosotros"
+                href={getLocalizedPath("/#nosotros", lang)}
                 class="nav-link text-white/90 hover:text-white font-medium transition-colors"
-                >Nosotros</a
+                >{t.nav.about}</a
             >
             <!-- Noticias temporalmente ocultas
             <a
-                href="/news"
+                href={getLocalizedPath("/news", lang)}
                 class="nav-link text-white/90 hover:text-white font-medium transition-colors"
-                >Noticias</a
+                >{t.nav.news}</a
             >
             -->
+
+            <!-- Language Selector -->
+            <div class="relative" id="lang-dropdown">
+                <button
+                    type="button"
+                    id="lang-btn"
+                    class="flex items-center gap-2 text-white/90 hover:text-white font-medium transition-colors px-3 py-1.5 rounded-lg hover:bg-white/10"
+                    aria-label={t.languages.select}
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                >
+                    <span class="text-lg">{languageInfo[lang].flag}</span>
+                    <span class="text-sm uppercase">{lang}</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="transition-transform duration-200"
+                        id="lang-chevron"
+                    >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div
+                    id="lang-menu"
+                    class="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-1 min-w-[140px] opacity-0 invisible transform -translate-y-2 transition-all duration-200"
+                    role="menu"
+                >
+                    {
+                        locales.map((locale) => (
+                            <a
+                                href={getLocalizedPath(
+                                    pathWithoutLocale,
+                                    locale,
+                                )}
+                                class={`flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors ${locale === lang ? "text-brand font-bold bg-brand/5" : "text-gray-700"}`}
+                                role="menuitem"
+                            >
+                                <span class="text-lg">
+                                    {languageInfo[locale].flag}
+                                </span>
+                                <span>{languageInfo[locale].name}</span>
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+
             <a
-                href="/#contacto"
+                href={getLocalizedPath("/#contacto", lang)}
                 class="px-5 py-2 bg-white text-brand-dark font-bold rounded-full hover:bg-white/90 transition-all shadow-md"
             >
-                Contactar
+                {t.nav.contact}
             </a>
         </nav>
 
@@ -50,7 +122,7 @@ const { theme = "light" } = Astro.props;
         <button
             id="mobile-menu-btn"
             class="md:hidden z-50 text-white p-2"
-            aria-label="Abrir menú de navegación"
+            aria-label={t.header.openMenu}
             aria-expanded="false"
             aria-controls="mobile-menu"
         >
@@ -80,26 +152,43 @@ const { theme = "light" } = Astro.props;
         id="mobile-menu"
         role="dialog"
         aria-label="Menú de navegación"
-        class="fixed inset-0 bg-brand-dark/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 md:hidden flex justify-center items-center"
+        class="fixed inset-0 bg-brand-dark/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center"
     >
         <nav class="flex flex-col gap-8 text-center text-white text-xl">
-            <a href="/#servicios" class="mobile-link hover:text-brand-light"
-                >Servicios</a
+            <a
+                href={getLocalizedPath("/#servicios", lang)}
+                class="mobile-link hover:text-brand-light">{t.nav.services}</a
             >
-            <a href="/#nosotros" class="mobile-link hover:text-brand-light"
-                >Nosotros</a
+            <a
+                href={getLocalizedPath("/#nosotros", lang)}
+                class="mobile-link hover:text-brand-light">{t.nav.about}</a
             >
             <!-- Noticias temporalmente ocultas
-            <a href="/news" class="mobile-link hover:text-brand-light"
-                >Noticias</a
+            <a href={getLocalizedPath("/news", lang)} class="mobile-link hover:text-brand-light"
+                >{t.nav.news}</a
             >
             -->
             <a
-                href="/#contacto"
+                href={getLocalizedPath("/#contacto", lang)}
                 class="mobile-link px-6 py-2 bg-white text-brand-dark font-bold rounded-full"
-                >Contactar</a
+                >{t.nav.contact}</a
             >
         </nav>
+
+        <!-- Mobile Language Selector -->
+        <div class="mt-12 flex gap-4">
+            {
+                locales.map((locale) => (
+                    <a
+                        href={getLocalizedPath(pathWithoutLocale, locale)}
+                        class={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${locale === lang ? "bg-white text-brand-dark font-bold" : "bg-white/10 text-white hover:bg-white/20"}`}
+                    >
+                        <span class="text-lg">{languageInfo[locale].flag}</span>
+                        <span class="text-sm uppercase">{locale}</span>
+                    </a>
+                ))
+            }
+        </div>
     </div>
 </header>
 
@@ -116,6 +205,10 @@ const { theme = "light" } = Astro.props;
 
     header.scrolled .nav-link {
         @apply text-gray-700 hover:text-brand;
+    }
+
+    header.scrolled #lang-btn {
+        @apply text-gray-700 hover:text-brand hover:bg-gray-100;
     }
 
     /* Home Page Logic: Logo hidden initially */
@@ -144,6 +237,18 @@ const { theme = "light" } = Astro.props;
     :global(body.theme-light) header:not(.scrolled) #mobile-menu-btn {
         @apply text-gray-800;
     }
+    :global(body.theme-light) header:not(.scrolled) #lang-btn {
+        @apply text-gray-700;
+    }
+
+    /* Language dropdown open state */
+    #lang-menu.open {
+        @apply opacity-100 visible translate-y-0;
+    }
+
+    #lang-chevron.open {
+        @apply rotate-180;
+    }
 </style>
 
 <script>
@@ -152,6 +257,11 @@ const { theme = "light" } = Astro.props;
     const mobileBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
     const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    // Language dropdown
+    const langBtn = document.getElementById("lang-btn");
+    const langMenu = document.getElementById("lang-menu");
+    const langChevron = document.getElementById("lang-chevron");
 
     // Check if we are on home (simple check, or rely on body class added by layout/page)
     const isHome = document.body.classList.contains("is-home");
@@ -187,10 +297,6 @@ const { theme = "light" } = Astro.props;
         document.body.classList.toggle("overflow-hidden");
         // Update aria-expanded for accessibility
         mobileBtn?.setAttribute("aria-expanded", isOpen ? "false" : "true");
-        mobileBtn?.setAttribute(
-            "aria-label",
-            isOpen ? "Abrir menú de navegación" : "Cerrar menú de navegación",
-        );
     });
 
     mobileLinks.forEach((link) => {
@@ -198,6 +304,25 @@ const { theme = "light" } = Astro.props;
             mobileMenu?.classList.add("translate-x-full");
             document.body.classList.remove("overflow-hidden");
         });
+    });
+
+    // Language dropdown
+    langBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        langMenu?.classList.toggle("open");
+        langChevron?.classList.toggle("open");
+        const isExpanded = langMenu?.classList.contains("open");
+        langBtn?.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest("#lang-dropdown")) {
+            langMenu?.classList.remove("open");
+            langChevron?.classList.remove("open");
+            langBtn?.setAttribute("aria-expanded", "false");
+        }
     });
 
     // Initial check

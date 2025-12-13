@@ -1,0 +1,163 @@
+{
+    "nav": {
+        "services": "Services",
+        "about": "About Us",
+        "news": "News",
+        "contact": "Contact"
+    },
+    "header": {
+        "openMenu": "Open navigation menu",
+        "closeMenu": "Close navigation menu"
+    },
+    "hero": {
+        "title": "Labor, Tax and Accounting Consulting Online in the Canary Islands",
+        "subtitle": "Experience, technology and closeness at the service of your business.",
+        "cta": "Contact Now",
+        "ctaSecondary": "Our Services",
+        "logoAlt": "CIE Asesoría - Labor, tax and accounting consulting in the Canary Islands"
+    },
+    "stats": {
+        "years": "Years of Experience",
+        "companies": "Companies Managed",
+        "support": "Full Support"
+    },
+    "services": {
+        "title": "Our Services",
+        "description": "We offer 360º management for freelancers and SMEs, combining technical expertise with the latest technology.",
+        "labor": {
+            "title": "Labor",
+            "description": "Comprehensive payroll management, social security contributions and hiring. Continuous legal-labor advice for your peace of mind."
+        },
+        "fiscal": {
+            "title": "Tax",
+            "description": "Efficient tax planning, tax filing and representation before the Tax Agency."
+        },
+        "accounting": {
+            "title": "Accounting",
+            "description": "Up-to-date accounting, balance sheet analysis and official books. Clear information for decision making."
+        },
+        "learnMore": "Learn more"
+    },
+    "about": {
+        "title": "Your business,",
+        "titleHighlight": "a connected and intelligent ecosystem",
+        "description": "We understand your business as a living network. We don't manage isolated documents; we integrate your tax, labor and accounting data to create a global and fluid vision of your activity.",
+        "feature1": "Total data synchronization",
+        "feature2": "360º view of your growth",
+        "feature3": "Proactive and frictionless management",
+        "imageTitle": "Digital Ecosystem",
+        "imageDescription": "Unified management without barriers.",
+        "imageAlt": "Business structure and solidity",
+        "newsButton": "Discover our news"
+    },
+    "contact": {
+        "title": "Let's Talk About Your Project",
+        "description": "We're ready to answer your questions. Complete the form and send your inquiry.",
+        "nameLabel": "Full name",
+        "namePlaceholder": "Your name",
+        "phoneLabel": "Phone",
+        "phonePlaceholder": "Your phone",
+        "emailLabel": "Email address",
+        "emailPlaceholder": "youremail@example.com",
+        "messageLabel": "Message",
+        "messagePlaceholder": "How can we help you?",
+        "privacyLabel": "I have read and accept the",
+        "privacyLink": "privacy policy",
+        "privacyLabelEnd": "and authorize the processing of my data to respond to this inquiry.",
+        "submitButton": "Send Message",
+        "submitting": "Sending...",
+        "recaptchaNotice": "This site is protected by reCAPTCHA and the",
+        "googlePrivacy": "Google Privacy Policy",
+        "googleTerms": "Google Terms of Service",
+        "successMessage": "Message sent successfully!",
+        "errorMessage": "Error sending message. Please try again.",
+        "connectionError": "Connection error. Please try again."
+    },
+    "footer": {
+        "legalNotice": "Legal Notice",
+        "terms": "Terms of Service",
+        "privacy": "Privacy Policy",
+        "complaints": "Complaints Channel",
+        "cookies": "Cookies"
+    },
+    "cookies": {
+        "title": "We Value Your Privacy",
+        "description": "We use our own and third-party cookies to improve your experience, analyze traffic and personalize content. You can accept all, reject them or configure your preferences. More information in our",
+        "policyLink": "Cookie Policy",
+        "configure": "Configure",
+        "rejectAll": "Reject",
+        "acceptAll": "Accept All",
+        "modalTitle": "Cookie Settings",
+        "modalClose": "Close cookie settings",
+        "modalDescription": "Here you can select which categories of cookies you want to authorize. Technical cookies are necessary for the website to function correctly and cannot be deactivated.",
+        "technical": {
+            "title": "Technical and Necessary",
+            "badge": "Required",
+            "description": "They allow navigation and access to secure areas of the website."
+        },
+        "analytics": {
+            "title": "Analytics and Performance",
+            "description": "They help us understand how you interact with the website to improve it (e.g. Google Analytics)."
+        },
+        "marketing": {
+            "title": "Advertising and Marketing",
+            "description": "They allow us to show you personalized advertising based on your browsing habits."
+        },
+        "savePreferences": "Save Preferences"
+    },
+    "accessibility": {
+        "skipToContent": "Skip to main content"
+    },
+    "meta": {
+        "title": "Online Consulting in the Canary Islands",
+        "description": "CIE Asesoría - Canarian online consultancy located in Gran Tarajal. Experts in labor, tax and accounting management.",
+        "keywords": "Canarian consultancy, online consultancy, Gran Tarajal, labor management, tax, accounting, CIE Asesoría"
+    },
+    "languages": {
+        "es": "Español",
+        "en": "English",
+        "de": "Deutsch",
+        "select": "Select language"
+    },
+    "technology": {
+        "badge": "Digital Innovation",
+        "title": "Technology at the service of",
+        "titleHighlight": "your peace of mind",
+        "description": "Forget about paperwork and complex procedures. Our cloud platform allows you to have total control of your business from anywhere.",
+        "secureArea": {
+            "title": "Secure Client Area",
+            "description": "Access your documents, taxes and payroll 24/7 with maximum security."
+        },
+        "realTime": {
+            "title": "Real-Time Information",
+            "description": "View the status of your company with intuitive and updated graphs."
+        },
+        "cta": "Request Demo",
+        "imageAlt": "Technological illustration of business management",
+        "status": "Status",
+        "taxesUpToDate": "Taxes up to date",
+        "payroll": "Payroll",
+        "sending": "Sending... 100%",
+        "growth": "Growth +24%"
+    },
+    "legal": {
+        "legalNotice": {
+            "title": "Legal Notice",
+            "pageTitle": "Legal Notice | CIE Asesoría"
+        },
+        "privacy": {
+            "title": "Privacy Policy",
+            "pageTitle": "Privacy Policy | CIE Asesoría"
+        },
+        "terms": {
+            "title": "Terms of Service",
+            "pageTitle": "Terms of Service | CIE Asesoría"
+        },
+        "complaints": {
+            "title": "Complaints Channel",
+            "pageTitle": "Complaints Channel | CIE Asesoría",
+            "cta": "SUBMIT COMPLAINT",
+            "warning": "Important: Please read the complaint management procedure carefully before accessing the channel"
+        }
+    }
+}

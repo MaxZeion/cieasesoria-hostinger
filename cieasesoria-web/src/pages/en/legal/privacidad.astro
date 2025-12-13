@@ -1,0 +1,87 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { useTranslations } from "../../../i18n";
+
+const lang = "en";
+const t = useTranslations(lang);
+---
+
+<Layout title={t.legal.privacy.pageTitle} theme="light">
+    <main
+        class="pt-32 pb-20 px-6 max-w-4xl mx-auto prose prose-brand-dark lg:prose-lg"
+    >
+        <h1 class="font-serif text-4xl mb-8 text-surface">
+            {t.legal.privacy.title}
+        </h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r">
+            <p class="text-blue-800 font-medium">
+                <strong>ℹ️ Note:</strong> This privacy policy is subject to Spanish
+                and European data protection law. The official binding version is
+                the <a href="/legal/privacidad" class="underline"
+                    >Spanish version</a
+                >.
+            </p>
+        </div>
+
+        <p class="lead">
+            The objective of the Privacy and Data Protection Policy of C.I.E.
+            FUERTEVENTURA, S.L. is to protect information on the internet and
+            the data that the user may enter on the website, in compliance with
+            applicable legislation (GDPR and Spanish LOPD).
+        </p>
+
+        <p>
+            The use and navigation of the website, as well as the subscription
+            of any forms contained therein, will imply acceptance by the user of
+            this Privacy and Data Protection Policy.
+        </p>
+
+        <hr class="border-gray-200 my-8" />
+
+        <h3>Use and Processing of Personal Data</h3>
+        <p>
+            In compliance with the applicable regulations, we inform you that
+            the data provided, as well as data derived from your navigation, may
+            be stored in files owned by C.I.E. FUERTEVENTURA, S.L., who will
+            access them solely for the purpose of attending to your request,
+            managing the requested service and maintaining the relationship
+            established in the forms you subscribe to.
+        </p>
+
+        <h3>Security Measures</h3>
+        <p>
+            C.I.E. FUERTEVENTURA, S.L. has implemented the necessary technical
+            and organizational security measures to guarantee the security of
+            your personal data and prevent its alteration, loss and unauthorized
+            treatment and/or access, taking into account the state of
+            technology, the nature of the stored data and the risks to which
+            they are exposed.
+        </p>
+
+        <h3>
+            Exercise of Rights: Access, Rectification, Cancellation and
+            Opposition
+        </h3>
+        <p>
+            Individuals who have provided their data to C.I.E. FUERTEVENTURA,
+            S.L. may contact us to exercise their rights of access,
+            rectification, cancellation and opposition regarding the data
+            incorporated in our files.
+        </p>
+        <p>
+            The interested party may exercise their rights through written
+            communication addressed to C.I.E. FUERTEVENTURA, S.L. at the
+            following address: Avda. de la Constitución, 3 floor 1 door 4, Gran
+            Tarajal 35620 LAS PALMAS, or via email at
+            <a href="mailto:cieasesoria@gmail.com">cieasesoria@gmail.com</a>
+        </p>
+
+        <h3>Minors</h3>
+        <p>
+            The services provided by this website are not directed at minors
+            under 14 years of age, so data from these individuals should not be
+            provided.
+        </p>
+    </main>
+</Layout>

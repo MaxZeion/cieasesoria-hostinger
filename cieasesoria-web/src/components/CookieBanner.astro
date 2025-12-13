@@ -1,5 +1,12 @@
 ---
+import { useTranslations, type Locale } from "../i18n";
 
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <!-- Cookie Banner Container -->
@@ -17,17 +24,14 @@
         >
             <div class="flex-1 text-center md:text-left">
                 <h3 class="font-serif text-xl font-bold mb-2 text-brand">
-                    Valoramos tu Privacidad
+                    {t.cookies.title}
                 </h3>
                 <p class="text-sm text-gray-300 leading-relaxed max-w-3xl">
-                    Utilizamos cookies propias y de terceros para mejorar tu
-                    experiencia, analizar el tráfico y personalizar contenido.
-                    Puedes aceptar todas, rechazarlas o configurar tus
-                    preferencias. Más información en nuestra
+                    {t.cookies.description}
                     <a
                         href="/cookies"
                         class="text-brand underline hover:text-white transition-colors"
-                        >Política de Cookies</a
+                        >{t.cookies.policyLink}</a
                     >.
                 </p>
             </div>
@@ -37,21 +41,21 @@
                     id="btn-manage"
                     class="px-6 py-2.5 text-sm font-bold border border-white/30 rounded-lg hover:bg-white/10 hover:border-white transition-colors"
                 >
-                    Configurar
+                    {t.cookies.configure}
                 </button>
                 <button
                     type="button"
                     id="btn-reject-all"
                     class="px-6 py-2.5 text-sm font-bold bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
                 >
-                    Rechazar
+                    {t.cookies.rejectAll}
                 </button>
                 <button
                     type="button"
                     id="btn-accept-all"
                     class="px-6 py-2.5 text-sm font-bold bg-brand text-surface rounded-lg hover:bg-white transition-colors shadow-lg shadow-brand/20"
                 >
-                    Aceptar Todas
+                    {t.cookies.acceptAll}
                 </button>
             </div>
         </div>
@@ -77,12 +81,12 @@
                 id="cookie-modal-title"
                 class="font-serif text-2xl font-bold text-surface"
             >
-                Configuración de Cookies
+                {t.cookies.modalTitle}
             </h3>
             <button
                 type="button"
                 id="btn-close-modal"
-                aria-label="Cerrar configuración de cookies"
+                aria-label={t.cookies.modalClose}
                 class="text-gray-400 hover:text-surface transition-colors p-2 hover:bg-gray-100 rounded-full"
             >
                 <svg
@@ -105,9 +109,7 @@
         <!-- Body -->
         <div class="p-6 space-y-6">
             <p class="text-gray-600 text-sm">
-                Aquí puedes seleccionar qué categorías de cookies deseas
-                autorizar. Las cookies técnicas son necesarias para que el sitio
-                web funcione correctamente y no se pueden desactivar.
+                {t.cookies.modalDescription}
             </p>
 
             <!-- Technical (Required) -->
@@ -117,16 +119,15 @@
                 <div class="flex-1">
                     <div class="flex items-center gap-2 mb-1">
                         <h4 class="font-bold text-surface">
-                            Técnicas y Necesarias
+                            {t.cookies.technical.title}
                         </h4>
                         <span
                             class="text-[10px] font-bold bg-brand/20 text-brand-dark px-2 py-0.5 rounded-full uppercase"
-                            >Obligatorias</span
+                            >{t.cookies.technical.badge}</span
                         >
                     </div>
                     <p class="text-xs text-gray-500">
-                        Permiten la navegación y el acceso a áreas seguras del
-                        sitio web.
+                        {t.cookies.technical.description}
                     </p>
                 </div>
                 <div>
@@ -145,11 +146,10 @@
             >
                 <label for="check-analytics" class="flex-1 cursor-pointer">
                     <h4 class="font-bold text-surface mb-1">
-                        Analíticas y Rendimiento
+                        {t.cookies.analytics.title}
                     </h4>
                     <p class="text-xs text-gray-500">
-                        Nos ayudan a entender cómo interactúas con la web para
-                        mejorarla (ej. Google Analytics).
+                        {t.cookies.analytics.description}
                     </p>
                 </label>
                 <div>
@@ -167,11 +167,10 @@
             >
                 <label for="check-marketing" class="flex-1 cursor-pointer">
                     <h4 class="font-bold text-surface mb-1">
-                        Publicidad y Marketing
+                        {t.cookies.marketing.title}
                     </h4>
                     <p class="text-xs text-gray-500">
-                        Permiten mostrarte publicidad personalizada según tus
-                        hábitos de navegación.
+                        {t.cookies.marketing.description}
                     </p>
                 </label>
                 <div>
@@ -193,7 +192,7 @@
                 id="btn-save-preferences"
                 class="px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-surface transition-colors shadow-lg"
             >
-                Guardar Preferencias
+                {t.cookies.savePreferences}
             </button>
         </div>
     </div>

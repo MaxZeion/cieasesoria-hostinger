@@ -1,17 +1,30 @@
 ---
+import { useTranslations, getLocalizedPath, type Locale } from "../i18n";
+
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
 // Get reCAPTCHA site key from environment
 const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
+
+// Pass translations to client-side script
+const clientTranslations = {
+    connectionError: t.contact.connectionError,
+};
 ---
 
 <section id="contacto" class="py-20 px-8 bg-white text-surface">
     <div class="max-w-[1200px] mx-auto">
         <div class="text-center mb-16">
             <h2 class="font-serif text-4xl font-bold text-surface mb-4">
-                Hablemos de tu Proyecto
+                {t.contact.title}
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                Estamos listos para resolver tus dudas. Completa el formulario y
-                envía tu consulta.
+                {t.contact.description}
             </p>
         </div>
 
@@ -42,14 +55,14 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
                         <label
                             for="nombre"
                             class="font-medium text-sm text-gray-700"
-                            >Nombre completo</label
+                            >{t.contact.nameLabel}</label
                         >
                         <input
                             type="text"
                             id="nombre"
                             name="nombre"
                             required
-                            placeholder="Tu nombre"
+                            placeholder={t.contact.namePlaceholder}
                             class="px-4 py-3 rounded-lg border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
                         />
                     </div>
@@ -57,13 +70,13 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
                         <label
                             for="telefono"
                             class="font-medium text-sm text-gray-700"
-                            >Teléfono</label
+                            >{t.contact.phoneLabel}</label
                         >
                         <input
                             type="tel"
                             id="telefono"
                             name="telefono"
-                            placeholder="Tu teléfono"
+                            placeholder={t.contact.phonePlaceholder}
                             class="px-4 py-3 rounded-lg border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
                         />
                     </div>
@@ -71,14 +84,14 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
 
                 <div class="flex flex-col gap-2">
                     <label for="email" class="font-medium text-sm text-gray-700"
-                        >Correo electrónico</label
+                        >{t.contact.emailLabel}</label
                     >
                     <input
                         type="email"
                         id="email"
                         name="email"
                         required
-                        placeholder="tucorreo@ejemplo.com"
+                        placeholder={t.contact.emailPlaceholder}
                         class="px-4 py-3 rounded-lg border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
                     />
                 </div>
@@ -86,14 +99,15 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
                 <div class="flex flex-col gap-2">
                     <label
                         for="mensaje"
-                        class="font-medium text-sm text-gray-700">Mensaje</label
+                        class="font-medium text-sm text-gray-700"
+                        >{t.contact.messageLabel}</label
                     >
                     <textarea
                         id="mensaje"
                         name="mensaje"
                         rows="4"
                         required
-                        placeholder="¿En qué podemos ayudarte?"
+                        placeholder={t.contact.messagePlaceholder}
                         class="px-4 py-3 rounded-lg border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all resize-none"
                     ></textarea>
                 </div>
@@ -108,12 +122,13 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
                         class="mt-1 w-4 h-4 text-brand rounded border-gray-300 focus:ring-brand"
                     />
                     <label for="privacidad" class="text-sm text-gray-500">
-                        He leído y acepto la <a
-                            href="/legal/privacidad"
+                        {t.contact.privacyLabel}
+                        <a
+                            href={getLocalizedPath("/legal/privacidad", lang)}
                             class="text-brand-dark underline hover:text-surface"
-                            >política de privacidad</a
-                        > y autorizo el tratamiento de mis datos para responder a
-                        esta consulta.
+                            >{t.contact.privacyLink}</a
+                        >
+                        {t.contact.privacyLabelEnd}
                     </label>
                 </div>
 
@@ -122,7 +137,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
                     id="submit-btn"
                     class="mt-2 w-full px-8 py-4 bg-brand text-white font-bold rounded-lg shadow-lg hover:bg-brand-dark hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
-                    <span id="btn-text">Enviar Mensaje</span>
+                    <span id="btn-text">{t.contact.submitButton}</span>
                     <span id="btn-loading" class="hidden">
                         <svg
                             class="animate-spin inline-block w-5 h-5 mr-2"
@@ -143,24 +158,24 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                             ></path>
                         </svg>
-                        Enviando...
+                        {t.contact.submitting}
                     </span>
                 </button>
 
                 <!-- reCAPTCHA v3 branding (required by Google) -->
                 <p class="text-xs text-gray-600 text-center">
-                    Este sitio está protegido por reCAPTCHA y aplican la
+                    {t.contact.recaptchaNotice}
                     <a
                         href="https://policies.google.com/privacy"
                         class="underline hover:text-gray-800"
                         target="_blank"
-                        rel="noopener">Política de Privacidad de Google</a
+                        rel="noopener">{t.contact.googlePrivacy}</a
                     > y
                     <a
                         href="https://policies.google.com/terms"
                         class="underline hover:text-gray-800"
                         target="_blank"
-                        rel="noopener">Términos de Servicio de Google</a
+                        rel="noopener">{t.contact.googleTerms}</a
                     >.
                 </p>
             </form>
@@ -169,9 +184,16 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
 </section>
 
 <!-- reCAPTCHA v3 Script -->
-<script is:inline define:vars={{ siteKey: recaptchaSiteKey }}>
+<script
+    is:inline
+    define:vars={{
+        siteKey: recaptchaSiteKey,
+        translations: clientTranslations,
+    }}
+>
     // Store site key in window for form script
     window.RECAPTCHA_SITE_KEY = siteKey;
+    window.CONTACT_TRANSLATIONS = translations;
 
     // Load reCAPTCHA script dynamically
     if (siteKey) {
@@ -200,6 +222,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
 
     // Get site key from the inline script or window
     const siteKey = (window as any).RECAPTCHA_SITE_KEY || "";
+    const translations = (window as any).CONTACT_TRANSLATIONS || {};
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -256,6 +279,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || "";
         } catch (error) {
             // Network error
             formMessage.textContent =
+                translations.connectionError ||
                 "Error de conexión. Por favor, inténtalo de nuevo.";
             formMessage.className =
                 "p-4 rounded-lg text-center font-medium bg-red-100 text-red-800 border border-red-200";

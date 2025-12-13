@@ -1,0 +1,118 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { useTranslations } from "../../i18n";
+
+const lang = "de";
+const t = useTranslations(lang);
+---
+
+<Layout title={t.legal.complaints.pageTitle} theme="light">
+    <main
+        class="pt-32 pb-20 px-6 max-w-4xl mx-auto prose prose-brand-dark lg:prose-lg"
+    >
+        <header class="text-center mb-12">
+            <h1 class="font-serif text-4xl md:text-5xl mb-4 text-surface">
+                {t.legal.complaints.title}
+            </h1>
+            <p class="text-xl md:text-2xl font-medium text-primary">
+                C.I.E. FUERTEVENTURA, S.L.
+            </p>
+        </header>
+
+        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-8 rounded-r">
+            <p class="text-amber-800 font-medium">
+                <strong>⚠️ {t.legal.complaints.warning}</strong>
+            </p>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r">
+            <p class="text-blue-800 font-medium">
+                <strong>ℹ️ Hinweis:</strong> Dieses Beschwerdekanalverfahren unterliegt
+                spanischem Recht. Die vollständige bindende Version ist die <a
+                    href="/canal-de-denuncias"
+                    class="underline">spanische Version</a
+                >.
+            </p>
+        </div>
+
+        <hr class="border-gray-200 my-8" />
+
+        <h2>1. ZWECK</h2>
+        <p>
+            Der Zweck dieses Verfahrens ist die Regulierung des Empfangs, der
+            Bearbeitung, der Untersuchung und der Lösung von Beschwerden über
+            mutmaßliche Unregelmäßigkeiten oder Verstöße, die von Mitarbeitern,
+            Handelsvertretern, Führungskräften oder Geschäftspartnern begangen
+            wurden und die im Rahmen der Geschäftstätigkeit von C.I.E.
+            FUERTEVENTURA, S.L. auftreten können.
+        </p>
+
+        <p>
+            Der Beschwerdekanal von C.I.E. FUERTEVENTURA, S.L. ist über die
+            Unternehmenswebsite unter <a
+                href="https://canaldenuncias.cieasesoria.com"
+                class="text-primary hover:underline"
+                >https://canaldenuncias.cieasesoria.com</a
+            > zugänglich und erleichtert die Nutzung durch Mitarbeiter, Handelsvertreter,
+            Führungskräfte, Geschäftspartner und alle Interessierten.
+        </p>
+
+        <h2>2. ANWENDUNGSBEREICH</h2>
+        <p>
+            Dieses Verfahren gilt für alle Mitarbeiter, Handelsvertreter,
+            Führungskräfte und den Vorstand von C.I.E. FUERTEVENTURA, S.L.
+        </p>
+
+        <h2>3. WICHTIGE ASPEKTE DES BESCHWERDEKANALS</h2>
+
+        <h3>3.1 Meldepflicht</h3>
+        <p>
+            Jeder, der fundierte Kenntnis von einer Art von Handlung oder
+            Tatsache hat, die gegen die Grundsätze und Werte des Ethik- oder
+            Verhaltenskodex verstoßen oder eine rechtswidrige Handlung
+            darstellen könnte, muss dies über den etablierten Kanal melden.
+        </p>
+
+        <h3>3.2 Meldepflichtige Sachverhalte</h3>
+        <p>
+            Meldepflichtige Sachverhalte müssen sich auf Verhaltensweisen,
+            Verstöße oder Unregelmäßigkeiten konzentrieren, die gegen die
+            Grundsätze und Werte des Ethik- und Verhaltenskodex verstoßen oder
+            eine rechtswidrige Handlung darstellen können.
+        </p>
+
+        <h3>3.3 Rechte des Hinweisgebers</h3>
+        <ul>
+            <li><strong>Recht auf vorherige Information</strong></li>
+            <li>
+                <strong
+                    >Recht auf eingeschränkte Nutzung von Informationen</strong>
+            </li>
+            <li><strong>Recht auf Anonymität</strong></li>
+            <li><strong>Recht auf Vertraulichkeit</strong></li>
+            <li>
+                <strong
+                    >Recht auf eine Antwort innerhalb einer angemessenen Frist</strong>
+            </li>
+            <li>
+                <strong
+                    >Recht auf eine transparente Untersuchung mit einem
+                    unparteiischen Gesprächspartner</strong>
+            </li>
+            <li><strong>Rechte aus dem Datenschutz</strong></li>
+            <li><strong>Wahlrecht</strong></li>
+            <li><strong>Recht auf Schutz vor Vergeltung</strong></li>
+        </ul>
+
+        <hr class="border-gray-200 my-12" />
+
+        <div class="text-center mt-12">
+            <a
+                href="https://canaldenuncias.cieasesoria.com"
+                class="inline-block bg-primary text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-primary/90 transition-colors no-underline shadow-lg hover:shadow-xl"
+            >
+                🛡️ {t.legal.complaints.cta}
+            </a>
+        </div>
+    </main>
+</Layout>

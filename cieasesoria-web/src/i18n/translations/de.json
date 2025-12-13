@@ -1,0 +1,163 @@
+{
+    "nav": {
+        "services": "Dienstleistungen",
+        "about": "Über uns",
+        "news": "Nachrichten",
+        "contact": "Kontakt"
+    },
+    "header": {
+        "openMenu": "Navigationsmenü öffnen",
+        "closeMenu": "Navigationsmenü schließen"
+    },
+    "hero": {
+        "title": "Arbeits-, Steuer- und Buchhaltungsberatung online auf den Kanarischen Inseln",
+        "subtitle": "Erfahrung, Technologie und Nähe im Dienste Ihres Unternehmens.",
+        "cta": "Jetzt kontaktieren",
+        "ctaSecondary": "Unsere Dienstleistungen",
+        "logoAlt": "CIE Asesoría - Arbeits-, Steuer- und Buchhaltungsberatung auf den Kanarischen Inseln"
+    },
+    "stats": {
+        "years": "Jahre Erfahrung",
+        "companies": "Verwaltete Unternehmen",
+        "support": "Volle Unterstützung"
+    },
+    "services": {
+        "title": "Unsere Dienstleistungen",
+        "description": "Wir bieten 360º-Management für Freiberufler und KMUs und kombinieren technisches Fachwissen mit neuester Technologie.",
+        "labor": {
+            "title": "Arbeitsrecht",
+            "description": "Umfassende Lohnabrechnung, Sozialversicherungsbeiträge und Einstellung. Kontinuierliche arbeitsrechtliche Beratung für Ihre Sicherheit."
+        },
+        "fiscal": {
+            "title": "Steuerrecht",
+            "description": "Effiziente Steuerplanung, Steuererklärungen und Vertretung vor der Steuerbehörde."
+        },
+        "accounting": {
+            "title": "Buchhaltung",
+            "description": "Aktuelle Buchhaltung, Bilanzanalyse und offizielle Bücher. Klare Informationen für die Entscheidungsfindung."
+        },
+        "learnMore": "Mehr erfahren"
+    },
+    "about": {
+        "title": "Ihr Unternehmen,",
+        "titleHighlight": "ein vernetztes und intelligentes Ökosystem",
+        "description": "Wir verstehen Ihr Unternehmen als lebendiges Netzwerk. Wir verwalten keine isolierten Dokumente; wir integrieren Ihre Steuer-, Arbeits- und Buchhaltungsdaten, um eine globale und fließende Vision Ihrer Aktivität zu schaffen.",
+        "feature1": "Vollständige Datensynchronisation",
+        "feature2": "360º-Blick auf Ihr Wachstum",
+        "feature3": "Proaktives und reibungsloses Management",
+        "imageTitle": "Digitales Ökosystem",
+        "imageDescription": "Einheitliches Management ohne Barrieren.",
+        "imageAlt": "Unternehmensstruktur und Solidität",
+        "newsButton": "Entdecken Sie unsere Neuigkeiten"
+    },
+    "contact": {
+        "title": "Lassen Sie uns über Ihr Projekt sprechen",
+        "description": "Wir sind bereit, Ihre Fragen zu beantworten. Füllen Sie das Formular aus und senden Sie Ihre Anfrage.",
+        "nameLabel": "Vollständiger Name",
+        "namePlaceholder": "Ihr Name",
+        "phoneLabel": "Telefon",
+        "phonePlaceholder": "Ihre Telefonnummer",
+        "emailLabel": "E-Mail-Adresse",
+        "emailPlaceholder": "ihremail@beispiel.com",
+        "messageLabel": "Nachricht",
+        "messagePlaceholder": "Wie können wir Ihnen helfen?",
+        "privacyLabel": "Ich habe die",
+        "privacyLink": "Datenschutzrichtlinie",
+        "privacyLabelEnd": "gelesen und akzeptiere sie und genehmige die Verarbeitung meiner Daten zur Beantwortung dieser Anfrage.",
+        "submitButton": "Nachricht senden",
+        "submitting": "Wird gesendet...",
+        "recaptchaNotice": "Diese Website ist durch reCAPTCHA geschützt und es gelten die",
+        "googlePrivacy": "Google-Datenschutzrichtlinie",
+        "googleTerms": "Google-Nutzungsbedingungen",
+        "successMessage": "Nachricht erfolgreich gesendet!",
+        "errorMessage": "Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.",
+        "connectionError": "Verbindungsfehler. Bitte versuchen Sie es erneut."
+    },
+    "footer": {
+        "legalNotice": "Impressum",
+        "terms": "Nutzungsbedingungen",
+        "privacy": "Datenschutzrichtlinie",
+        "complaints": "Beschwerdekanal",
+        "cookies": "Cookies"
+    },
+    "cookies": {
+        "title": "Wir schätzen Ihre Privatsphäre",
+        "description": "Wir verwenden eigene und Drittanbieter-Cookies, um Ihre Erfahrung zu verbessern, den Verkehr zu analysieren und Inhalte zu personalisieren. Sie können alle akzeptieren, ablehnen oder Ihre Präferenzen konfigurieren. Weitere Informationen in unserer",
+        "policyLink": "Cookie-Richtlinie",
+        "configure": "Konfigurieren",
+        "rejectAll": "Ablehnen",
+        "acceptAll": "Alle akzeptieren",
+        "modalTitle": "Cookie-Einstellungen",
+        "modalClose": "Cookie-Einstellungen schließen",
+        "modalDescription": "Hier können Sie auswählen, welche Cookie-Kategorien Sie autorisieren möchten. Technische Cookies sind für das ordnungsgemäße Funktionieren der Website erforderlich und können nicht deaktiviert werden.",
+        "technical": {
+            "title": "Technische und notwendige",
+            "badge": "Erforderlich",
+            "description": "Sie ermöglichen die Navigation und den Zugang zu sicheren Bereichen der Website."
+        },
+        "analytics": {
+            "title": "Analytik und Leistung",
+            "description": "Sie helfen uns zu verstehen, wie Sie mit der Website interagieren, um sie zu verbessern (z.B. Google Analytics)."
+        },
+        "marketing": {
+            "title": "Werbung und Marketing",
+            "description": "Sie ermöglichen es uns, Ihnen personalisierte Werbung basierend auf Ihren Surfgewohnheiten zu zeigen."
+        },
+        "savePreferences": "Einstellungen speichern"
+    },
+    "accessibility": {
+        "skipToContent": "Zum Hauptinhalt springen"
+    },
+    "meta": {
+        "title": "Online-Beratung auf den Kanarischen Inseln",
+        "description": "CIE Asesoría - Kanarische Online-Beratung in Gran Tarajal. Experten für Arbeits-, Steuer- und Buchhaltungsmanagement.",
+        "keywords": "Kanarische Beratung, Online-Beratung, Gran Tarajal, Arbeitsmanagement, Steuer, Buchhaltung, CIE Asesoría"
+    },
+    "languages": {
+        "es": "Español",
+        "en": "English",
+        "de": "Deutsch",
+        "select": "Sprache wählen"
+    },
+    "technology": {
+        "badge": "Digitale Innovation",
+        "title": "Technologie im Dienste",
+        "titleHighlight": "Ihrer Ruhe",
+        "description": "Vergessen Sie den Papierkram und komplexe Verwaltungsaufgaben. Unsere Cloud-Plattform ermöglicht Ihnen die vollständige Kontrolle über Ihr Unternehmen von überall aus.",
+        "secureArea": {
+            "title": "Sicherer Kundenbereich",
+            "description": "Greifen Sie rund um die Uhr mit maximaler Sicherheit auf Ihre Dokumente, Steuern und Gehaltsabrechnungen zu."
+        },
+        "realTime": {
+            "title": "Echtzeitinformationen",
+            "description": "Visualisieren Sie den Status Ihres Unternehmens mit intuitiven und aktuellen Grafiken."
+        },
+        "cta": "Demo anfordern",
+        "imageAlt": "Technologische Illustration des Unternehmensmanagements",
+        "status": "Status",
+        "taxesUpToDate": "Steuern aktuell",
+        "payroll": "Gehaltsabrechnungen",
+        "sending": "Wird gesendet... 100%",
+        "growth": "Wachstum +24%"
+    },
+    "legal": {
+        "legalNotice": {
+            "title": "Impressum",
+            "pageTitle": "Impressum | CIE Asesoría"
+        },
+        "privacy": {
+            "title": "Datenschutzrichtlinie",
+            "pageTitle": "Datenschutzrichtlinie | CIE Asesoría"
+        },
+        "terms": {
+            "title": "Nutzungsbedingungen",
+            "pageTitle": "Nutzungsbedingungen | CIE Asesoría"
+        },
+        "complaints": {
+            "title": "Beschwerdekanal",
+            "pageTitle": "Beschwerdekanal | CIE Asesoría",
+            "cta": "BESCHWERDE EINREICHEN",
+            "warning": "Wichtig: Bitte lesen Sie das Beschwerdeverfahren sorgfältig durch, bevor Sie auf den Kanal zugreifen"
+        }
+    }
+}

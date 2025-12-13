@@ -1,5 +1,12 @@
 ---
+import { useTranslations, type Locale } from "../i18n";
 
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
@@ -12,7 +19,7 @@
         <div class="w-full flex justify-center">
             <img
                 src="/assets/white-logo-no-background.svg"
-                alt="CIE Asesoría - Asesoría laboral, fiscal y contable en Canarias"
+                alt={t.hero.logoAlt}
                 width="700"
                 height="504"
                 class="w-3/4 max-w-[700px] h-auto drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
@@ -27,10 +34,10 @@
             <h1
                 class="font-serif text-[2rem] md:text-[2.2rem] font-bold leading-[1.2] text-brand"
             >
-                Asesoría Laboral, Fiscal y Contable online en Canarias
+                {t.hero.title}
             </h1>
             <p class="font-serif text-[1.1rem] leading-relaxed font-normal">
-                Experiencia, tecnología y cercanía al servicio de tu empresa.
+                {t.hero.subtitle}
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center mt-4">
@@ -38,13 +45,13 @@
                     href="#contacto"
                     class="px-8 py-3 bg-brand text-surface font-bold rounded-full shadow-lg hover:bg-white hover:scale-105 transition-all duration-300"
                 >
-                    Contactar Ahora
+                    {t.hero.cta}
                 </a>
                 <a
                     href="#servicios"
                     class="px-8 py-3 border-2 border-white/30 text-white font-medium rounded-full hover:bg-white/10 hover:border-white hover:scale-105 transition-all duration-300"
                 >
-                    Nuestros Servicios
+                    {t.hero.ctaSecondary}
                 </a>
             </div>
         </div>

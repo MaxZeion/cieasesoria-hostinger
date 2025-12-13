@@ -1,0 +1,83 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { useTranslations } from "../../../i18n";
+
+const lang = "en";
+const t = useTranslations(lang);
+---
+
+<Layout title={t.legal.terms.pageTitle} theme="light">
+    <main
+        class="pt-32 pb-20 px-6 max-w-4xl mx-auto prose prose-brand-dark lg:prose-lg"
+    >
+        <h1 class="font-serif text-4xl mb-8 text-surface">
+            {t.legal.terms.title}
+        </h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded-r">
+            <p class="text-blue-800 font-medium">
+                <strong>ℹ️ Note:</strong> These terms of service are subject to Spanish
+                law. The official binding version is the <a
+                    href="/legal/terminos"
+                    class="underline">Spanish version</a
+                >.
+            </p>
+        </div>
+
+        <p class="lead">Terms and conditions for using the website.</p>
+
+        <hr class="border-gray-200 my-8" />
+
+        <p>
+            Users guarantee and are responsible, in any case, for the veracity,
+            accuracy, validity and authenticity of the personal data provided,
+            committing to keep them duly updated.
+        </p>
+
+        <p>
+            The User undertakes to use the website and Services in accordance
+            with the law, this Legal Notice, the Particular Conditions of some
+            Services and with morality, generally accepted good customs and
+            public order.
+        </p>
+
+        <h3>Prohibitions</h3>
+        <p>
+            The User agrees not to transmit, disseminate or make available to
+            third parties information, data, content, messages, graphics,
+            drawings, sound and/or image files, photographs, recordings,
+            software and, in general, any kind of material that:
+        </p>
+        <ul>
+            <li>
+                Is contrary to fundamental rights and public freedoms recognized
+                by law.
+            </li>
+            <li>
+                Is contrary to the right to honor, personal and family privacy.
+            </li>
+            <li>Constitutes illegal, misleading or unfair advertising.</li>
+            <li>
+                Incorporates viruses or other elements that may damage systems.
+            </li>
+            <li>Causes difficulties in the normal operation of the service.</li>
+        </ul>
+
+        <h3>Restricted Access Areas</h3>
+        <p>
+            To access restricted access areas, users must have the corresponding
+            access passwords. C.I.E. FUERTEVENTURA, S.L. reserves the right to
+            freely accept or reject the registration request of any user. Users
+            will be responsible for the custody of their access passwords.
+        </p>
+
+        <h3>Intellectual Property</h3>
+        <p>
+            All elements that make up the graphic design of the websites, menus,
+            navigation buttons, HTML code, and, in general, all content and
+            information that the User may access through the web pages of C.I.E.
+            FUERTEVENTURA, S.L. are subject to industrial and intellectual
+            property rights, patents, trademarks or copyrights.
+        </p>
+    </main>
+</Layout>

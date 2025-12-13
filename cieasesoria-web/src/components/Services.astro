@@ -1,23 +1,28 @@
 ---
 import { Users, FileText, BookOpen, ArrowRight } from "lucide-astro";
+import { useTranslations, type Locale } from "../i18n";
+
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
 
 const services = [
     {
-        title: "Laboral",
-        description:
-            "Gestión integral de nóminas, seguros sociales y contratación. Asesoramiento jurídico-laboral continuo para su tranquilidad.",
+        title: t.services.labor.title,
+        description: t.services.labor.description,
         Icon: Users,
     },
     {
-        title: "Fiscal",
-        description:
-            "Planificación fiscal eficiente, presentación de impuestos y representación ante la Agencia Tributaria.",
+        title: t.services.fiscal.title,
+        description: t.services.fiscal.description,
         Icon: FileText,
     },
     {
-        title: "Contable",
-        description:
-            "Contabilidad al día, análisis de balances y libros oficiales. Información clara para la toma de decisiones.",
+        title: t.services.accounting.title,
+        description: t.services.accounting.description,
         Icon: BookOpen,
     },
 ];
@@ -27,12 +32,11 @@ const services = [
     <div class="max-w-[1200px] mx-auto">
         <header class="text-center mb-16">
             <h2 class="font-serif text-4xl font-bold text-surface mb-4">
-                Nuestros Servicios
+                {t.services.title}
             </h2>
             <div class="w-[60px] h-[3px] bg-brand mx-auto mb-6"></div>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Ofrecemos una gestión 360º para autónomos y pymes, combinando la
-                experiencia técnica con la última tecnología.
+                {t.services.description}
             </p>
         </header>
 
@@ -57,7 +61,7 @@ const services = [
                             href="#contacto"
                             class="inline-flex items-center text-primary font-bold text-sm tracking-wider uppercase hover:text-brand-dark transition-colors"
                         >
-                            Saber más{" "}
+                            {t.services.learnMore}{" "}
                             <ArrowRight class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                         </a>
                     </div>

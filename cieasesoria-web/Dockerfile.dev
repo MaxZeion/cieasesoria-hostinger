@@ -12,11 +12,15 @@ COPY package.json pnpm-lock.yaml ./
 # Install dependencies
 RUN pnpm install
 
+# Copy entrypoint script
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
 # Copy the rest of the code (will be overwritten by volume mount)
 COPY . .
 
 # Expose Astro dev server port
 EXPOSE 4321
 
-# Start development server with host binding for Docker
-CMD ["pnpm", "run", "dev", "--host", "0.0.0.0"]
+# Start development server via entrypoint (loads .env first)
+CMD ["/docker-entrypoint.sh"]

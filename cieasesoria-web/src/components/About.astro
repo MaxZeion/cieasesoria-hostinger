@@ -1,5 +1,13 @@
 ---
 import { CheckCircle2, Handshake } from "lucide-astro";
+import { useTranslations, getLocalizedPath, type Locale } from "../i18n";
+
+interface Props {
+    lang?: Locale;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
@@ -17,41 +25,38 @@ import { CheckCircle2, Handshake } from "lucide-astro";
         <!-- Text Content -->
         <div class="flex-1 space-y-8">
             <h2 class="font-serif text-4xl font-bold leading-tight">
-                Tu empresa, <br />
-                <span class="text-brand"
-                    >un ecosistema conectado e inteligente</span
-                >
+                {t.about.title}
+                <br />
+                <span class="text-brand">{t.about.titleHighlight}</span>
             </h2>
             <div class="w-20 h-1 bg-brand"></div>
 
             <p class="text-lg text-gray-200 leading-relaxed font-light">
-                Entendemos tu negocio como una red viva. No gestionamos
-                documentos aislados; integramos tus datos fiscales, laborales y
-                contables para crear una visión global y fluida de tu actividad.
+                {t.about.description}
             </p>
 
             <ul class="space-y-4 text-gray-200">
                 <li class="flex items-center gap-3">
-                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" /> Sincronización
-                    total de datos
+                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" />
+                    {t.about.feature1}
                 </li>
                 <li class="flex items-center gap-3">
-                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" /> Visión 360º
-                    de tu crecimiento
+                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" />
+                    {t.about.feature2}
                 </li>
                 <li class="flex items-center gap-3">
-                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" /> Gestión proactiva
-                    y sin fricción
+                    <CheckCircle2 class="text-brand w-6 h-6 shrink-0" />
+                    {t.about.feature3}
                 </li>
             </ul>
 
             <!-- Botón de noticias temporalmente oculto
             <div class="pt-4">
                 <a
-                    href="/news"
+                    href={getLocalizedPath("/news", lang)}
                     class="px-8 py-3 bg-transparent border-2 border-brand text-brand font-bold rounded-full hover:bg-brand hover:text-surface hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300"
                 >
-                    Conoce nuestras novedades
+                    {t.about.newsButton}
                 </a>
             </div>
             -->
@@ -71,7 +76,7 @@ import { CheckCircle2, Handshake } from "lucide-astro";
                 >
                     <img
                         src="/assets/about-abstract.webp"
-                        alt="Estructura y solidez empresarial"
+                        alt={t.about.imageAlt}
                         class="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-700"
                     />
                     <!-- Overlay Text -->
@@ -81,10 +86,10 @@ import { CheckCircle2, Handshake } from "lucide-astro";
                         <h3
                             class="font-serif text-xl font-bold text-white mb-1"
                         >
-                            Ecosistema Digital
+                            {t.about.imageTitle}
                         </h3>
                         <p class="text-sm text-gray-300">
-                            Gestión unificada y sin barreras.
+                            {t.about.imageDescription}
                         </p>
                     </div>
                 </div>
